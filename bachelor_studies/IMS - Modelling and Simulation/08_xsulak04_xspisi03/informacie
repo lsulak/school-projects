@@ -1,0 +1,47 @@
+ZADANIE
+Zjistěte aktuální stav nájezdů, sjezdů a stavebních uzávěr na dálnici D1 v úseku Brno-Praha 
+v obou směrech. 
+
+Modelujte dálnici jako posloupnost obslužných linek s vypočtenou kapacitou.
+
+Každá obslužná linka bude modelovat 1km dálnice (sub-úsek). 
+
+Kapacitu každého sub-úseku určete (navrhněte a zdůvodněte) jako maximální počet vozidel, 
+které je možno umístit ve dvou pruzích na 1 km (případně v jednom pruhu). 
+
+Z aktuálního počtu vozidel v modelovaném sub-úseku určete (navrhněte a zdůvodněte)
+rychlost, jakou se smí vozidla na daném úseku pohybovat.
+
+Do systému budou vstupovat vozidla prostřednictvím nájezdů dle určeného
+(navrhněte a zdůvodněte) procesu příchodů. Podobně budou vozidla systém opouštět
+prostřednictvím sjezdů. 
+
+Experimentálně zjistěte propustnost dálnice v různou dobu (denní doba, den v týdnu).
+
+-------------------
+POCET VOZIDIEL
+pocet voidel r 2012
+			http://www.ceskedalnice.cz/prilohy/intenzity-2012.pdf
+registracia	http://scitani2010.rsd.cz/pages/results/default.aspx
+
+------------------
+OBMEDZENIA
+useky, stavby - http://www.dalnice.com/mapy/automapy/d01/automapa_d01_uvod.htm
+			a 	http://www.novad1.cz
+	+ vystupy	http://www.ceskedalnice.cz/schema/d1
+				http://www.dalnice-silnice.cz/D1_6.htm
+	useless?	http://cs.wikipedia.org/wiki/Dálnice_D1
+				http://www.ceskedalnice.cz/dalnicni-sit/ve-stavbe
+				http://www.ceskedalnice.cz/dalnice/d1
+
+-------------------
+HAVARIE
+http://sztorkie.steadynet.org/filez/dokumenty/sZkola/zemepis/dalnice_d1/textcast.pdf
+D1, v r. 2006 - 3803 nehod , na 1km teda 7 havariii 
+husty sneh - 10% aut rychleji než 130 km/h, 38% rychleji než 110 km/h,
+
+Dá se říci, že nejnebezpečnější úseky dálnice D1 jsou těsně před Prahou (do 25. kilometru)http://domaci.ihned.cz/c1-55966890-na-d1-se-jezdi-pomerne-bezpecne-v-nehodach-ale-patri-cesko-mezi-nejhorsi
+
+bc praca - r 2006
+https://www.google.cz/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0CCIQFjAA&url=http%3A%2F%2Fis.mendelu.cz%2Fzp%2Fportal_zp.pl%3Fprehled%3Dvyhledavani%3Bpodrobnosti%3D18938%3Bdownload_prace%3D1&ei=LQV9VLXWDNLg7QaMpoD4Bw&usg=AFQjCNF3bXlbf7p-rHomVN8k7XN4RUcVWQ&sig2=EyDINfrRQh1hVY6rqALbXw&bvm=bv.80642063,d.ZGU
+

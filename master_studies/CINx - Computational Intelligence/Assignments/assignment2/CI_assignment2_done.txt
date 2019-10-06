@@ -1,0 +1,228 @@
+1. The samples (0,0), (0,1), (1,0), (-1,-1) belong to category A and the samples (2.1,0), (0,-2,5), (1.6,-1,6) belong to category B.  Draw the samples in a 2-D diagram. Are the categories linearly separable? Design a perceptron which will separate the categories.  Starting with initial weights 0.5 and learning rate 0.1 calculate the output and the weights for 2 epochs.
+	
+	Yes they can be linearly separable.
+	Training data:
+		(0, 0, 0),
+		(0, 1, 0),
+		(1, 0, 0),
+		(-1, -1, 0),
+		(2.1, 0, 1),
+		(0, -2.5, 1),
+		(1.6, -1.6, 1)
+
+	Threshold = 0.6, bias (x0 = 0), learning rate = 0.1
+
+	Epoch |	Inputs | Desired Output | Init weights | Actual Output | Error | Final weights
+	--------------------------------------------------------------------------------------
+		1 |  0, 0  | 		0		| 	0.5, 0.5   |     0 (0)	   |   0   |    0.5, 0.5
+		  |  0, 1  |		0		|   0.5, 0.5   |     0 (0.5)   |   0   |    0.5, 0.5
+		  |  1, 0  |        0		|   0.5, 0.5   |     0 (0.5)   |   0   |    0.5, 0.5
+		  | -1, -1 | 	    0		|   0.5, 0.5   | 	 0 (-1)	   |   0   |    0.5, 0.5
+		  |2.1, 0  | 		1		|   0.5, 0.5   |     1 (1.05)  |   0   |    0.5, 0.5
+		  |  0,-2.5|		1		|   0.5, 0.5   | 	 0 (-1.25) |   1   |    0.5, 0.25
+		  |1.6,-1.6|		1		|	0.5, 0.25  | 	 0 (0.4)   |   1   |    0.66, 0.09
+	--------------------------------------------------------------------------------------
+		2 |  0, 0  | 		0		| 	0.66, 0.09 |     0 (0)	   |   0   |    0.66, 0.09
+		  |  0, 1  |		0		|   0.66, 0.09 |     0 (0.09 ) |   0   |    0.66, 0.09
+		  |  1, 0  |        0		|   0.66, 0.09 |     1 (0.66)  |  -1   |    0.56, 0.09
+		  | -1, -1 | 	    0		|   0.56, 0.09 | 	 0 (-0.65) |   0   |    0.56, 0.09
+		  |2.1, 0  | 		1		|   0.56, 0.09 |     1 (1.176) |   0   |    0.56, 0.09
+		  |  0,-2.5|		1		|   0.56, 0.09 | 	 0 (-0.225)|   1   |    0.56, -0.16
+		  |1.6,-1.6|		1		|	0.56, -0.16| 	 1 (1.152) |   0   |    0.56, -0.16
+
+
+2. In a multilayer perceptron we have 2 inputs, 2 neuron in a hidden layer and one neuron in the output layer. Given inputs 0.1 and 0.9 with desired output 1. Initial weights are 0.3 from the input layer to the hidden layer and 0.2 from the hidden layer to the output. Furthermore, all bias values are 0.4 and the learning rate 0.25. Find the new weight values after one backpropagation step. The activation function is sigmoid.
+
+		Training data:
+		(0.1, 0.9, 1),
+
+		w11, w12 and w13, w14 = 0.3
+
+		w21, w22 = 0.2
+
+		all bias vals = 0.4 = b1, b2, b3
+		each bias will be multiplicated with fixed values +1
+		
+		learning rate = 0.25 = alfa
+
+		---
+		Calculating an error (forward pass):
+			y1 = sig(0.1 * 0.3 + 0.9 * 0.3 + 0.4) = 1 / (1 + e ^ -(0.7)) = 0.67
+			y2 = sig(0.1 * 0.3 + 0.9 * 0.3 + 0.4) = 1 / (1 + e ^ -(0.7)) = 0.67
+
+			y3 = sig(0.67 * 0.2 + 0.67 * 0.2 + 0.4) = 1 / (1 + e ^ -(0.67)) = 0.66
+
+			err = 1 - 0.66 = 0.34
+		---
+		Weight training (backward pass), [eg = error gradient]:
+			eg3 = y3 * (1-y3) * err = 0.66 * (1 - 0.66) * 0.34 = 0.08
+
+			weight corrections:
+			delta_b3 = alfa * b3 * eg3 = 0.02
+			delta_w21 = alfa * y1 * eg3 = 0.013
+			delta_w22 = alfa * y2 * eg3 = 0.013
+
+			eg1 = y1 * (1-y1) * eg3 * w21 = 0.0035
+			eg2 = y2 * (1-y2) * eg3 * w22 = 0.0035
+
+			delta_b1 = alfa * b1 * eg1 = 0.00088
+			delta_b2 = alfa * b2 * eg2 = 0.00088
+			delta_w11 = alfa * x1 * eg1 = 0.000088
+			delta_w12 = alfa * x1 * eg2 = 0.000088
+			delta_w13 = alfa * x2 * eg1 = 0.00079
+			delta_w14 = alfa * x2 * eg2 = 0.00079
+
+			updating all weights and biases (thresholds):
+			w_ii = w_ii + delta_wii (same for biases)
+
+			b1 = 0.40088
+			b2 = 0.40088
+			b3 = 0.42
+			w11 = 0.300088
+			w12 = 0.300088
+			w13 = 0.30079
+			w14 = 0.30079
+			w21 = 0.213
+			w22 = 0.213
+
+
+3. Show that a neural network with many layers that have a linear activation function is equivalent to a neural network with a single layer.
+
+	For an activation function f_i(x) at layer i, the outputs are given by:
+		out_2_k = f_2(SUM_j(out_1_j * w_2_jk)) = f_2(SUM_j(f_1 * (SUM_i(in_i * w_1_ij)) * w_2_jk))
+
+		if the hidden layer activation function is linear, it is simplified to:
+			
+			out_2_k = f_2(SUM_i(in_i0 * SUM_j(w_1_ij * w_2_jk)))
+
+		which is equivalent to w_ik = SUM_j(w_1_ij * w_2_jk) and we know also that such network cannot deal with non-linearly separate problems.
+
+	Linear activation function means that the output is simply proportional to the input. More layers which have linear units do not help, it is still linear. What helps is more adaptive, non-linear hidden units in additional layers.
+ 
+
+4. Describe the difference between batch and sequential updates.
+
+	During batch update (offline training), weights are updated once the error is computed over ALL training samples. It means that all patterns are forward propagated and the error is determined and backpropagated, but weights are updated only when all patterns were processed. Sequential (online training) updates weights immediately after each sample so a given input is forward propagated, the error is determined and backpropagated and then the weights are updated - then the same for the next training pattern (sample).
+
+	Batch does steepest descent on the error surface and online does zig-zags around the diretion of steepests descent. 
+
+
+5. Explain the problem of overfitting and how validation is used to solve it.
+	
+	It happens when the network learned too much details and it's so fit that the model suffers from a good generalization. Validation can be used for detecting when the learning is not improving so significantly so it should end - use of validation dataset with Early stopping method. Otherwise it could overfit if the learning would continue.
+
+
+6. For the input patterns [-0.5  0.5  1 -1] and [-0.3  0.3 0.6 -0.6] perform z-axis normalization and calculate the new patterns.
+ 	
+ 	x1 = [-0.5  0.5  1 -1] ... n1 = 4
+ 	x2 = [-0.3  0.3 0.6 -0.6] ... n2 = 4
+
+	f1 = 1 / sqrt(n1) = 0.5
+	f2 = 1 / sqrt(n2) = 0.5
+
+	l = sqrt(sum([each element]^2))
+	l1 = 1.58
+	l2 = 0.95
+
+	s1 = sqrt(1 - (l1^2) / n) = sqrt(0.376) = 0.613 (synthetic variable)
+	s2 = sqrt(1 - (l2^2) / n) = sqrt(0.774) = 0.880
+
+		eqvivalent calculation:
+		s1 = f1 * sqrt(n1-l1^2) = 0.5 * sqrt(1.504) = 0.613
+		s2 = f2 * sqrt(n2-l2^2) = 0.5 * sqrt(3.098) = 0.880
+
+	x_i_norm = [for each element: element * f_i ] plus add s_i 
+	x1_norm = [-0.25 0.25 0.5 -0.5 0.613]
+	x2_norm = [-0.15 0.15 0.3 -0.3 0.880]
+ 
+
+7. In a Kohonen neural net with 1000 constant training cycles and initial learning rate 0.15, in how many cycled the learning rate will become 0.03?
+ 	
+ 	L(t) = LR_0 * e ^ (-t / lambda)
+
+ 		LR_0 = initial learning rate
+ 		t = current iteration
+ 		lambda = time constant, calculated as num_of_iterations / map_radius
+
+ 	L(t_to_solve) = 0.15 * exp (-t_to_solve / 1000)  ? == ? 0.03
+ 		exp(-t_to_solve / 1000) = 0.2
+ 		t_to_solve = 1609
+
+ 	After 1609 cycles.
+
+
+8. In a Kohonen neural net with three units in the input we present the following 4 patterns in the exact order shown [0.8 0.7 0.4], [0.6 0.9 0.9], [0.3 0.4 0.1] and [0.1 0.1 0.3]. These patterns correspond to the 2 output units with the weights [0.5 0.6 0.8] and [0.4 0.2 0.5].  Letting the radius of neighborhood to be 0 and the learning rate 0.5. Calculate the changes in the weights the first cycle.
+
+	Unsupervised type of neural network - it's a method for dimensionality reduction, typically 2-dimensional on output. Training samples are called map. They don't apply error-correction learning (as other NN do), but competitive learning. It works in 2 modes: training (competitive process aka vector quantization) and mapping (automatically classifies a new input vector).
+
+	In:
+		x1 = [0.8 0.7 0.4] 
+		x2 = [0.6 0.9 0.9] 
+		x3 = [0.3 0.4 0.1] 
+		x4 = [0.1 0.1 0.3]
+	Out:
+		w1 = [0.5 0.6 0.8]
+		w2 = [0.4 0.2 0.5]
+
+	Learning rate = 0.5 = alfa
+	Radius or neighborhood = 0 -> it means that only the winning neuron will be updated, nothing else around.
+
+	a) Not needed to normalize weights, they are already in interval [-1, 1] 
+	
+	b) For every input vector: 
+		Just for knowing what is going on:
+			1. Calculate Euclidian Distance
+				dis_jk(t) = SQRT(SUM_i(x_ki(t) - w_ji(t))^2)
+
+				j = output weight (PE - elements of ANN - set of connected weights)
+				k = input pattern
+
+			2. Obtain the winning unit, by minimum of Euclidian Distances
+			3. Calculate the new weight of the winning unit
+				n = learning rate
+				x = input data vector
+				theta = restraing due to distance from BMU (best matching unit) = neighbourhood function
+
+				w_ji(t + 1) = w_ji(t) + theta(u, v, t) * n(t)(x_ki(t) - w_ji(t)) for j e N
+
+				updating w_jk: for each i in range(4): wj_i + learning_rate * (x_ki - w_ji) 
+
+		------
+		for x1 ( [0.8 0.7 0.4] ):
+			1.
+				dis_11(t) = SQRT(SUM_i(x_1i(t) - w_1i(t)^2)) = SQRT(0.09 + 0.01 - 0.16) = 0.51
+				dis_21(t) = SQRT(SUM_i(x_1i(t) - w_2i(t)^2)) = SQRT(0.16 + 0.25 - 0.01)) = 0.65
+
+			2.	winner: dis_11 = 0.51, so weight 1
+			3. 	w1 = [0.5+0.5*0.3 	0.6+0.5*0.1 	0.8+0.5*(-0.4)] = [0.65 0.65 0.6]
+
+		for x2 ( [0.6 0.9 0.9] ):
+			1.
+				dis_12(t) = SQRT(0.0025 + 0.0625 + 0.09) = 0.39
+				dis_22(t) = SQRT(0.04 + 0.42 + 0.16) = 0.79
+
+			2. 	winner: dis_12 = 0.39, so weight 1
+			3. 	w1 = [0.65+0.5*(-0.05)	0.65+0.5*0.25	0.6+0.5*0.3] = [0.625 0.775 0.75]
+
+		for x3 ( [0.3 0.4 0.1] ):
+			1.
+				dis_13(t) = SQRT(0.11 + 0.14 + 0.42) = 0.82
+				dis_23(t) = SQRT(0.01 + 0.04 + 0.16) = 0.46
+
+			2.	winner: dis_23 = 0.46, so weight 2
+			3. 	w2 = [0.4+0.5*(-0.1)	0.2+0.5*0.2		0.5+0.5*(-0.4)] = [0.35 0.3 0.3]
+
+		for x4 ( [0.1 0.1 0.3] ):
+			1.
+				dis_14(t) = SQRT(0.28 + 0.46 + 0.20) = 0.97
+				dis_24(t) = SQRT(0.0625 + 0.04 + 0) = 0.32
+
+			2. 	winner: dis_24 = 0.25, so weight 2
+			3. 	w2 = [0.35+0.5*(-0.25)	0.3+0.5*(-0.2)	0.3+0.5*0] = [0.225 0.2 0.3]
+
+		----
+		Resulting weights:
+			w1 = [0.625 0.775 0.75]
+			w2 = [0.225 0.2 0.3]
+
+	c) Then it would continue by updating learning rate, reducing radius of topological scheme etc back to b) until the stopping condition is met.

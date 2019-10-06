@@ -1,0 +1,1 @@
+java -jar ./dest-server/ija2014-server.jar

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mpicc -o hello hello.c
+
+mpirun -np $1 hello
+
+rm -f hello

@@ -1,0 +1,19 @@
+drwxr-xr-x   37 ftp-adm  system       1024 Oct 01 17:04 X11
+drwxr-xr-x   28 ftp-adm  ftp-adm       512 Mar 22  2012 XFree86
+drwxr-xr-x    6 ftp-adm  ftp-adm       512 Aug 07  2002 books
+drwx------    8 ftp-adm  ftp-adm       512 Aug 07  2002 dce
+drwxr-xr-x   11 ftp-adm  ftp-adm       512 Oct 15  2003 doc
+drwxr-xr-x    3 ftp-adm  ftp-adm       512 Aug 07  2002 doc-local
+drwxr-xr-x    5 ftp-adm  ftp-adm       512 Oct 15  2003 drivers
+drwxr-xr-x  301 ftp-adm  ftp-adm      7168 Mar 19 03:30 gnu
+drwxr-xr-x    7 ftp-adm  ftp-adm       512 Aug 07  2002 local
+drwxr-xr-x    2 ftp-adm  sys           512 Aug 07  2002 lost+found
+-rw-r--r--    1 ftp-adm  ftp-adm  724435826 Mar 20 05:10 ls-lR
+-rw-r--r--    1 ftp-adm  ftp-adm  45474825 Mar 20 05:10 ls-lR.gz
+drwxr-xr-x    8 ftp-adm  system        512 Aug 07  2002 msdos
+drwxr-xr-x   19 ftp-adm  system        512 Aug 07  2002 networking
+drwxr-xr-x    3 ftp-adm  ftp-adm       512 Aug 07  2002 simtel.net
+drwxr-xr-x    7 ftp-adm  ftp-adm      2048 Aug 07  2002 sources
+drwxr-xr-x   16 ftp-adm  ftp-adm       512 Jul 23  2009 systems
+drwxr-xr-x    3 ftp-adm  ftp-adm       512 Aug 07  2002 usenet
+lrwxrwxrwx    1 root     system          7 Mar 21  2012 vendors -> drivers

@@ -1,0 +1,100 @@
+00.minotaur.fi.muni.cz, 1, insecured hash algorithm SHA1 - but on root/intermediate CA its not such a risk
+01.minotaur.fi.muni.cz, 4, unable to get local issuer certificate AND unable to verify the first certificate
+02.minotaur.fi.muni.cz, 4, self signed certificate AND unsupported certificate purpose
+03.minotaur.fi.muni.cz, 1, ok
+04.minotaur.fi.muni.cz, 4, invalid CA certificate AND unsupported certificate purpose
+05.minotaur.fi.muni.cz, 4, self signed certificate in certificate chain
+06.minotaur.fi.muni.cz, 3, insecured hash algorithm SHA1 - but on root/intermediate CA its not such a risk AND subject and hostname differ
+07.minotaur.fi.muni.cz, 3, subject name is missing
+08.minotaur.fi.muni.cz, 2, insecured hash algorithm SHA1
+09.minotaur.fi.muni.cz, 3, subject and hostname differ
+10.minotaur.fi.muni.cz, 1, ok
+11.minotaur.fi.muni.cz, 4, permitted subtree violation
+12.minotaur.fi.muni.cz, 1, ok
+13.minotaur.fi.muni.cz, 3, subject name has too general wildcard
+14.minotaur.fi.muni.cz, 1, ok
+15.minotaur.fi.muni.cz, 1, ok
+16.minotaur.fi.muni.cz, 4, unable to get local issuer certificate AND unable to verify the first certificate
+17.minotaur.fi.muni.cz, 4, certificate has expired
+18.minotaur.fi.muni.cz, 3, RSA/DSA public key size is too short AND older TLS/SSL version
+19.minotaur.fi.muni.cz, 3, subject name is missing
+20.minotaur.fi.muni.cz, 1, ok
+21.minotaur.fi.muni.cz, 1, ok
+22.minotaur.fi.muni.cz, 4, self signed certificate in certificate chain
+23.minotaur.fi.muni.cz, 2, insecured hash algorithm SHA1
+24.minotaur.fi.muni.cz, 1, ok
+25.minotaur.fi.muni.cz, 4, certificate has expired
+26.minotaur.fi.muni.cz, 1, ok
+27.minotaur.fi.muni.cz, 3, subject name is missing
+28.minotaur.fi.muni.cz, 3, subject and hostname differ
+29.minotaur.fi.muni.cz, 4, permitted subtree violation
+30.minotaur.fi.muni.cz, 3, insecured hash algorithm SHA1 - but on root/intermediate CA its not such a risk AND subject and hostname differ
+31.minotaur.fi.muni.cz, 4, unable to get local issuer certificate AND unable to verify the first certificate
+32.minotaur.fi.muni.cz, 4, self signed certificate AND unsupported certificate purpose
+33.minotaur.fi.muni.cz, 4, unable to get local issuer certificate AND unable to verify the first certificate
+34.minotaur.fi.muni.cz, 1, ok
+35.minotaur.fi.muni.cz, 4, invalid CA certificate AND unsupported certificate purpose
+36.minotaur.fi.muni.cz, 1, insecured hash algorithm SHA1 - but on root/intermediate CA its not such a risk
+37.minotaur.fi.muni.cz, 3, subject name is missing
+38.minotaur.fi.muni.cz, 3, subject name has too general wildcard
+39.minotaur.fi.muni.cz, 3, RSA/DSA public key size is too short AND older TLS/SSL version
+40.minotaur.fi.muni.cz, 1, ok
+41.minotaur.fi.muni.cz, 1, ok
+42.minotaur.fi.muni.cz, 4, permitted subtree violation
+43.minotaur.fi.muni.cz, 4, invalid CA certificate AND unsupported certificate purpose
+44.minotaur.fi.muni.cz, 1, ok
+45.minotaur.fi.muni.cz, 2, insecured hash algorithm SHA1
+46.minotaur.fi.muni.cz, 1, ok
+47.minotaur.fi.muni.cz, 4, self signed certificate in certificate chain
+48.minotaur.fi.muni.cz, 3, subject name has too general wildcard
+49.minotaur.fi.muni.cz, 4, unable to get local issuer certificate AND unable to verify the first certificate
+50.minotaur.fi.muni.cz, 3, RSA/DSA public key size is too short AND older TLS/SSL version
+51.minotaur.fi.muni.cz, 3, subject name is missing
+52.minotaur.fi.muni.cz, 1, insecured hash algorithm SHA1 - but on root/intermediate CA its not such a risk
+53.minotaur.fi.muni.cz, 4, unable to get local issuer certificate AND unable to verify the first certificate
+54.minotaur.fi.muni.cz, 4, self signed certificate AND unsupported certificate purpose
+55.minotaur.fi.muni.cz, 4, certificate has expired
+56.minotaur.fi.muni.cz, 1, ok
+57.minotaur.fi.muni.cz, 3, insecured hash algorithm SHA1 - but on root/intermediate CA its not such a risk AND subject and hostname differ
+58.minotaur.fi.muni.cz, 3, subject name is missing
+59.minotaur.fi.muni.cz, 3, subject and hostname differ
+60.minotaur.fi.muni.cz, 1, ok
+61.minotaur.fi.muni.cz, 4, unable to get local issuer certificate AND unable to verify the first certificate
+62.minotaur.fi.muni.cz, 4, certificate has expired
+63.minotaur.fi.muni.cz, 3, RSA/DSA public key size is too short AND older TLS/SSL version
+64.minotaur.fi.muni.cz, 2, insecured hash algorithm SHA1
+65.minotaur.fi.muni.cz, 3, subject and hostname differ
+66.minotaur.fi.muni.cz, 4, self signed certificate AND unsupported certificate purpose
+67.minotaur.fi.muni.cz, 1, ok
+68.minotaur.fi.muni.cz, 3, subject name is missing
+69.minotaur.fi.muni.cz, 1, ok
+70.minotaur.fi.muni.cz, 4, unable to get local issuer certificate AND unable to verify the first certificate
+71.minotaur.fi.muni.cz, 4, invalid CA certificate AND unsupported certificate purpose
+72.minotaur.fi.muni.cz, 4, permitted subtree violation
+73.minotaur.fi.muni.cz, 1, ok
+74.minotaur.fi.muni.cz, 3, subject name has too general wildcard
+75.minotaur.fi.muni.cz, 1, ok
+76.minotaur.fi.muni.cz, 3, subject name is missing
+77.minotaur.fi.muni.cz, 3, insecured hash algorithm SHA1 - but on root/intermediate CA its not such a risk AND subject and hostname differ
+78.minotaur.fi.muni.cz, 1, insecured hash algorithm SHA1 - but on root/intermediate CA its not such a risk
+79.minotaur.fi.muni.cz, 4, self signed certificate in certificate chain
+80.minotaur.fi.muni.cz, 4, permitted subtree violation
+81.minotaur.fi.muni.cz, 1, insecured hash algorithm SHA1 - but on root/intermediate CA its not such a risk
+82.minotaur.fi.muni.cz, 4, self signed certificate in certificate chain
+83.minotaur.fi.muni.cz, 1, ok
+84.minotaur.fi.muni.cz, 4, certificate has expired
+85.minotaur.fi.muni.cz, 2, insecured hash algorithm SHA1
+86.minotaur.fi.muni.cz, 4, self signed certificate AND unsupported certificate purpose
+87.minotaur.fi.muni.cz, 1, ok
+88.minotaur.fi.muni.cz, 1, ok
+89.minotaur.fi.muni.cz, 4, invalid CA certificate AND unsupported certificate purpose
+90.minotaur.fi.muni.cz, 3, subject name is missing
+91.minotaur.fi.muni.cz, 4, unable to get local issuer certificate AND unable to verify the first certificate
+92.minotaur.fi.muni.cz, 3, insecured hash algorithm SHA1 - but on root/intermediate CA its not such a risk AND subject and hostname differ
+93.minotaur.fi.muni.cz, 1, ok
+94.minotaur.fi.muni.cz, 1, ok
+95.minotaur.fi.muni.cz, 4, unable to get local issuer certificate AND unable to verify the first certificate
+96.minotaur.fi.muni.cz, 3, subject name has too general wildcard
+97.minotaur.fi.muni.cz, 3, subject name is missing
+98.minotaur.fi.muni.cz, 3, subject and hostname differ
+99.minotaur.fi.muni.cz, 3, RSA/DSA public key size is too short AND older TLS/SSL version

@@ -1,0 +1,98 @@
+Základní informace o dokumentu
+------------------------------
+rozmìry stránky: A4
+rozmìry textové oblasti: 18x25cm
+mezera vlevo: 1.5cm
+mezera nahoøe: 2.5cm
+font: standardní 10pt (vzorový dokument pou¾ívá kódování fontù IL2)
+sazba na dva sloupce: parametr twocolumn dokumentové tøídy article
+
+Upøesnìní
+---------
+- Jméno, Pøíjmení a e-mail autora v textu nahraïte svými vlastními údaji podle vzoru naznaèeného v èásti Text dokumentu.
+
+- Nadpisy sekcí a jejich èíslování sázejte k tomu urèenými pøíkazy. V dokumentu jsou pomocí dvou otazníkù vyznaèena místa, kde je tøeba pomocí pøíkazu doplnit odkaz na správnou sekci.
+
+- Pomlèky a spojovníky sázejte pomocí standardních LaTeXových pøíkazù, ne pomocí znakù z UTF-8. V dokumentu musí být pou¾ita správná ¹íøka pomlèek, spojovníkù a mezer mezi nimi podle kontextu.
+
+- Pokud LaTeX nerozdìlí èeské slovo správnì (babel stále nemá kompletní èeský slovník), napovìzte LaTeXu správným pøíkazem (globální nápovìda ale nemusí fungovat správnì se slovy, které obsahují diakritiku).
+
+- Kromì standardního písma je v textu, zejména v sekci 2, pou¾ito je¹tì dal¹ích 5 stupòù písma, dal¹í dvì rodiny písma a dal¹í 3 øezy písma (jednou je zmìnìna váha, dvakrát tvar písma). V¹e je nastavováno jednoduchými pøíkazy, není potøeba pou¾ívat NFSS (New Font Selection Scheme).
+
+- V tomto textu jsou pou¾ity tyto "dvojité uvozovky". Ve výsledném dokumentu musí být uvozovky podle zadaného PDF.
+
+- V tomto dokumentu jsou odkazovány externí zdroje informací v poznámkách pod èarou. Tento zpùsob odkazování lze pou¾ít jen pro opravdu malé dokumenty. LaTeX má vlastní standardní prostøedky pro vytváøení seznamù pou¾ité literatury a pro odkazování na polo¾ky v tomto seznamu. Tímto zpùsobem se øe¹í i odkazování na webové stránky. Této problematice bude vìnována jedna celá pøedná¹ka a samostatný projekt.
+
+- Problém se sazbou èeských uvozovek na ¹kolním serveru merlin lze øe¹it pomocí souboru http://www.root.cz/data/latex/csprimes.tex nebo si sami sami definujte makro \newcommand{\myuv}[1]{\quotedblbase #1\textquotedblleft}
+
+- Pøíkazy \section, \label, \ref, \maketitle jsou popisovány a¾ v dal¹ích pøedná¹kách, ale na webu jistì snadno najdete, jak je správnì pou¾ít. Pravidlo, které je v textu citováno (nápovìda!) je vysázeno prostøedím, k tomu urèeným, které jistì snadno objevíte sami, aèkoli také není v pøedná¹ce è. 2 zmínìno.
+
+- Pøi vypracování se øiïte i samotným textem vzorového dokumentu.
+
+- V maximální míøe vyu¾ijte LaTeX (pou¾ijte latex/pdflatex + babel + program vlna, cslatex ji¾ nepou¾ívejte) a jeho pøíkazy. Vzorový dokument byl vysázen LaTeXem na ¹kolním serveru merlin tìmito nástroji:
+  latex
+  dvips -t a4
+  ps2pdf
+  
+  Pøi pou¾ití pdflatexu je výsledný soubor vizuálnì toto¾ný, ale je dvakrát vìt¹í.
+  
+- Odevzdává se pouze zdrojový text dokumentu a soubor Makefile pro pøeklad. Oba soubory zabalte zipem a do informaèního systému odevzdejte archiv s názvem xlogin00-fit.zip (pou¾ijte svùj login a zkratku své fakulty; kromì zipu je akceptovatelný jen archiv tar+gzip, pak bude koncovka archivu .tar.gz).
+
+- Návod pro tvorbu jednoduchého Makefile: http://www.fit.vutbr.cz/~martinek/clang/make.html
+
+Text dokumentu
+--------------
+
+Typografická etiketa
+Vysázel: Jméno Pøíjmení
+xlogin00@stud.fit.vutbr.cz
+
+
+Hladká sazba
+Hladká sazba pou¾ívá jeden druh, øez a stupeò písma a je sázena na stanovenou ¹íøku odstavce. Je slo¾ena z odstavcù, obvykle zaèínajících zará¾kou, nejde-li o první odstavec za nadpisem. Mohou ale být sázeny i bez zará¾ky - rozhodující je celková grafická úprava, která musí být konzistentní. Odstavec konèí východovou øádkou. Ka¾dá vìta zaèíná velkým písmenem a nesmí zaèínat èíslicí.
+
+Zvýraznìní barvou, podtr¾ením, èi zmìnou písma se v textu nepou¾ívá. Hladká sazba je urèena pøedev¹ím pro del¹í texty, jako je beletrie. Poru¹ení konzistence sazby pùsobí v textu ru¹ivì a unavuje ètenáøùv zrak.
+
+
+Smí¹ená sazba
+Smí¹ená sazba má volnìj¹í pravidla. Klasická hladká sazba se doplòuje o dal¹í øezy písma pro zvýraznìní dùle¾itých pojmù. Existuje "pravidlo":
+
+Ètenáøe ohromíme na¹í profesionalitou, kdy¾ pou¾ijeme co nejvìt¹í poèet druhù, øezù, barev, velikostí, písma a jiných efektù.
+
+Toto pravidlo je l¾ivé! Pøíli¹ èasté zvýrazòování textových elementù a zmìny velikosti písma jsou známkou amatérismu autora a pùsobí velmi ru¹ivì, podobnì jako animovaný psík na webové stránce. Dobøe navr¾ený dokument nemá obsahovat více ne¾ 4 øezy èi druhy písma. Dobøe navr¾ený dokument je decentní, ne chaotický.
+
+Dùle¾itým znakem správnì vysázeného dokumentu je opìt konzistence - napøíklad sklonìný øez písma vyhradíme pouze pro doposud neznámé pojmy, tuèný øez pouze pro klíèová slova, a nebudeme to míchat. Sklonìný øez nepùsobí tak ru¹ivì a pou¾ívá se èastìji. V LaTeXu jej sázíme radìji pøíkazem \emph{text} ne¾ \textit{text}.
+
+Smí¹ená sazba se nejèastìji pou¾ívá pro sazbu vìdeckých èlánkù a technických zpráv. U del¹ích dokumentù vìdeckého èi technického charakteru je zvykem vysvìtlit význam rùzných typù zvýraznìní v úvodní kapitole.
+
+Dal¹í rady:
+* Nadpis nesmí konèit dvojteèkou a nesmí obsahovat odkazy na obrázky, citace, poznámky pod èarou, ...
+
+* Nadpisy, èíslování a odkazy na èíslované elementy, výpustky, pomlèky a jiné elementy musí být sázeny pøíkazy k tomu urèenými. Maximálnì vyu¾íváme mo¾ností LaTeXu a zvolené tøídy dokumentu.
+
+* Výèet, tabulka, obrázek, ani vzoreèek nesmí zaèínat hned pod nadpisem a nesmí tvoøit celou kapitolu.
+
+* Poznámky pod èarou pou¾ívejte støídmì. (©etøete i s textem v závorkách.)
+
+* Nepou¾ívejte velké mno¾ství malých obrázkù. Zva¾te, zda je nelze seskupit. Lze si pomoci tabulkou.
+
+* Bezchybným pravopisem a sazbou dáváme najevo úctu ke ètenáøi. Odbytý text s chybami bude ètenáø právem pova¾ovat za nedùvìryhodný.
+
+
+Èeské odli¹nosti
+Èeská sazba se oproti okolnímu svìtu v nìkterých aspektech mírnì li¹í. Jednou z odli¹ností je sazba uvozovek. Uvozovky se v èe¹tinì pou¾ívají pøevá¾nì pro zobrazení pøímé øeèi, zvýraznìní pøezdívek a ironie. V èe¹tinì se pou¾ívají uvozovky typu "9966" místo anglických "uvozovek" nebo dvojitých "uvozovek". Lze je sázet pøipravenými pøíkazy nebo pøi pou¾ití kódování UTF-8 i pøímo. Obì mo¾nosti mají své výhody i úskalí.
+
+Ve smí¹ené sazbì se øez uvozovek øídí øezem prvního uvozovaného slova. Pokud je uvozována celá vìta, sází se koncová teèka pøed uvozovku, pokud se uvozuje slovo nebo èást vìty, sází se interpunkce za uvozovku.
+
+Dal¹í odli¹ností je pravidlo pro sazbu koncù øádkù. V èeské sazbì by øádek nemìl konèit osamocenou jednopísmennou pøedlo¾kou nebo spojkou. Spojkou "a" konèit mù¾e pouze pøi sazbì do ¹íøky 25 liter. Abychom LaTeXu zabránili v sázení osamocených pøedlo¾ek, spojujeme je s následujícím slovem nezlomitelnou mezerou. Tu sázíme pomocí znaku ~ (vlnka, tilda). Pro systematické doplnìní vlnek slou¾í volnì ¹iøitelný program vlna od pana Ol¹áka.
+
+Principiálnì lep¹í øe¹ení nabízí balík encxvlna, od pánù Ol¹áka a Wagnera. Pro jeho pou¾ití je ov¹em potøeba speciální konfigurace LaTeXu.
+
+
+Závìr
+Jistì jste postøehli, ¾e tento dokument schválnì obsahuje nìkolik typografických prohøe¹kù. Sekce ?? a ?? obsahují typografické chyby. V kontextu celého textu je jistì snadno najdete. Je dobré znát mo¾nosti LaTeXu, ale je také nutné vìdìt, kdy je nepou¾ít.
+
+---
+1 Pøíli¹ mnoho poznámek ètenáøe rozptyluje, ale pøi rozumném dávkování mohou text okoøenit a uèinit srozumitelnìj¹ím.
+2 Viz ftp://math.feld.cvut.cz/pub/olsak/vlna/.
+3 Viz http://tug.ctan.org/pkg/encxvlna.

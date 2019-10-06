@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# @author	Ladislav Sulak (xsulak04@stud.fit.vutbr.cz)
+#
+# @login 	xsulak04			
+#
+# @date		3/2016
+#
+# @file 	test
+#
+# @brief	The second project for subject PRL - Minimum Extraction sort. 
+# @details	Minimum Extraction sort paralell algorithm for sorting the input
+#			data using the Open MPI library. 
+#			Numbers are being generated from /dev/urandom. 
+#			Please run with bash script ./test numbersAmount processorsAmount
+#			The input sequence is sorted and outputted in the same format on stdout.
+
+if [ $# -ne 2 ]; then
+	echo "Please provide 2 arguments: \
+the amount of numbers and processors for computing."
+	exit 1
+fi;
+
+if [[ $1 =~ [0-9]+$ ]] && [[ $2 =~ [0-9]+$ ]]; then
+	if [ $1 -ge 0 ] && [ $2 -ge 0 ]; then
+		numbers=$1;
+		processors=$2;
+	else
+		echo "The input arguments have to be both potitive numbers."
+		exit 1
+	fi
+else
+	echo "The input arguments must be both integers."
+    exit 1
+fi;
+
+mpic++ -o mes mes.cpp # --prefix /usr/local/share/OpenMPI on merlin
+
+# Create file with a random numbers
+dd if=/dev/urandom bs=1 count=$numbers of=numbers > /dev/null 2>&1
+
+mpirun -np $processors mes # --prefix /usr/local/share/OpenMPI on merlin
+
+rm -f mes numbers

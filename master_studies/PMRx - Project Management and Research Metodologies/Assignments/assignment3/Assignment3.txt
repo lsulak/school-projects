@@ -1,0 +1,94 @@
+Exercise 1 
+
+	a) I would design the experimental setup in this particular problem as following:
+
+		- since we know, how much data we have on our input and how often they come (25 images per second) and we are dealing with real time system, we cannot slow the final system down. I know the maximum execution times of other modules (20ms - probably per image, but it is not written in specifications) so now we have to ensure, that the execution time of our solution will fit so the final system can work on 25 frames per second without any delay. In numbers, it is in average 1 frame per 50ms, the other modules need maximum 20ms together so our algorithm can have maximum execution time of 30ms.
+
+		- so we have to estimate how good our algorithm is regarding detection and we have to ensure that it won't slow down the final solution. For this, we will work only with our module and not with the others, because we want to be exact and measure only our part. If we would measure everything together, we wouldn't know what exactly is maximum execution time of our algorithm because this information could be inaccurate - sometimes there could be a very small execution time of other modules. 
+
+		- since the frames will be different and incoming frames are different, it means that we can have a big variety in input and it is necessary to perform our measurement on a bigger dataset. I would prepare processed frames of few minutes.
+
+		- I would prepare the input data to our algorithm, pre-processed frames, with known information about face(s) in them. Then the measurement would be performed on such input.
+
+	b) I would measure execution time and the correctness of our algorithm by construction of confusion matrix, calculating accuracy, precision and recall.
+
+	c) Confounding variables can be ones, which correlates our algorithm's execution time and its correctness (and which we didn't count account for).
+
+		For example, some frames can contain more information and it could cost our algorithm more time to finish. More complicated image with more faces could take longer to compute and also the time for writing to memory now requires more number of operations (so also CPU time), in comparison to image almost without any visible objects and no faces.
+
+	d) I would mitigate such negative effect by following:
+		
+		If I would find out, that the complexity of an input image influences the algorithm performance a lot, I would try to optimize it. In case that memory operations are very expensive, I would try to reduce the number of writes (for example less often - not every frame). Or maybe even to lower the number of frames per second, which is however a big intervention to the specifications and I would need to discuss it with the project manager and probably also with the other members of the team.
+
+----
+	i) sample mean: 751 / 36 = 20,86
+
+	ii) standard deviation: SQRT(pow(20.8 - 20.86, 2) + pow(21.0 - 20.86, 2) + pow(18.0 - 20.86, 2) + pow(19.0 - 20.86, 2) + pow(18.3 - 20.86, 2) + pow(19 - 20.86, 2) + pow(24.0 - 20.86, 2) + pow(22.3 - 20.86, 2) + pow(21.5 - 20.86, 2) + pow(22.8 - 20.86, 2) + pow(21.6 - 20.86, 2) + pow(20.5 - 20.86, 2) + pow(22.0 - 20.86, 2) + pow(22.0 - 20.86, 2) + pow(19.5 - 20.86, 2) + pow(19.0 - 20.86, 2) + pow(24.0 - 20.86, 2) + pow(18.0 - 20.86, 2) + pow(20.4 - 20.86, 2) + pow(20.8 - 20.86, 2) + pow(25 - 20.86, 2) + pow(18.9 - 20.86, 2) + pow(20.5 - 20.86, 2) + pow(21.3 - 20.86, 2) + pow(19.1 - 20.86, 2) + pow(22.3 - 20.86, 2) + pow(21.4 - 20.86, 2) + pow(21.5 - 20.86, 2) + pow(22.8 - 20.86, 2) + pow(21.6 - 20.86, 2) + pow(20.5 - 20.86, 2) + pow(19.0 - 20.86, 2) + pow(18.9 - 20.86, 2) + pow(22.0 - 20.86, 2) + pow(21.3 - 20.86, 2) + pow(20.4 - 20.86, 2) / 36) = sqrt(105,25 / 36) = sqrt (2.92) = 1,71
+
+	iii) execution time of our algorithm is always less or equal to 20ms.
+
+	iv) execution time of our algorithmis is always less or equal to 25 (we can afford it since we have to process 25 frames per second and other modules need 20ms to perform their actions).
+
+	v) 99% confidence level means that we are testing the null hypothesis with significance level a = 0,01.
+
+		The calculation of test statistics:
+			z = (x_ - mi) / (sigma / sqrt(n)) = (20,86 - 20) / (1,71 / 6) = 0,86 / 0,285 = 3,02
+
+				where x_ = 20,86, mi = 20, sigma (std. dev) = 1,71, n = 36
+
+		We will use standard normal table from the assignment which is one-tailed. From the table, we got 2,33 as our normal table value (99% of confidence). Since we have one-tailed test, it means that we are searching if our Z value is in cirical region (if yes, our null hypothesis will be rejected): z < 2,33
+
+			Since z = 3,02 and z > 2,33, our null hypothesis is retained.
+
+	vi) The task was to implement a face detection module which co-operates with other modules with following specifications:
+		1. The selected camera captures images at 25 frames per second.
+		2. The video acquisition and pre-processing module has a maximum execution time of
+		10ms
+		3. The face tracking and the decision making and alerting subsystems together have a
+		maximum execution time of 10ms.
+		4. Your subsystem (i.e. algorithm) reads data (i.e. video frames) and writes (the
+		coordinates of the detected face – if any) to volatile memory. 
+
+		According to this specification, 36 tests were done with following execution times (in ms):
+			[t1 … t12] = [20.8, 21.0, 18.0, 19.0, 18.3, 19, 24.0, 22.3, 21.5, 22.8, 21.6, 20.5]
+			[t13 … t24] = [22.0, 22.0, 19.5, 19.0, 24.0, 18.0, 20.4, 20.8, 25, 18.9, 20.5, 21.3]
+			[t25 … t36] = [19.1, 22.3, 21.4, 21.5, 22.8, 21.6, 20.5, 19.0, 18.9, 22.0, 21.3, 20.4] 
+
+		From these values we calculated sample mean, standard deviation value and we stated the null and alternative hypothesis. Sample mean was  20,86 and standard deviation was 1,71. We estimated null hypothesis as to be true if and only if the Z value is bigger than 2.33 since we are working with 99% of confidence.
+
+		Summary
+			The final system will work in real time, which means that the processing time of the solution has limited maximum CPU time for the whole processing of each frame. We were able to implement face detection module which reads pre-processed data from camera and it writes its output, in the form of face(s) coordinates to the volaile memory. All speficiations were met and system can work in real time since our solution can process data in a reasonable amount of time, which had been also proved by hypothetic testing with 99% level of confidence calculated from 36 experiments.
+
+
+
+Exercise 2
+
+	1) 	Algorithm 1:
+			TP = 145 
+			TN = 4725
+			FP = 35
+			FN = 95
+
+		Accuracy = TN + TP / TN + FP + FN + TP = 4870 / 5000 = 0,974
+		Precision = TP / TP + FP = 145 / 180 = 0,806
+		Recall = TP / TP + FN = 145 / 240 = 0,604
+		F-score = 2 / ((1/Precision) + (1/Recall)) = 2 / (1,241 + 1,656) = 0,690
+
+
+		Algorithm 2:
+			TP - 150
+			TN - 4710
+			FP - 50
+			FN - 90
+
+		Accuracy = TN + TP / TN + FP + FN + TP = 4860 / 5000 = 0,972
+		Precision = TP / TP + FP = 150 / 200 = 0,75
+		Recall = TP / TP + FN = 150 / 240 = 0,625
+		F-score = 2 / ((1/Precision) + (1/Recall)) = 2 / (1,33 + 1,6) = 0,682
+
+		-----
+		Algorithm 1 has better accuracy and F-score, so it outperforms algorithm 2.
+
+	2) If I would need to find as many references as possible and manually filter out the wrong ones, which is very often the case in systematic review, I would prefer Algorithm 2 since it is only a less precise and accurate, but it is able to find more articles - in numbers, the amount of correct articles is better than in the Algorithm 1, so I would choose Algorithm 2.
+
+	However, if I would want to have the resulting articles to be in my category, so when my requirement would be that I want to have more precise results (in case for example that there is extremely big number of articles and I have to filter out the results more), I would use Algorithm 1. 

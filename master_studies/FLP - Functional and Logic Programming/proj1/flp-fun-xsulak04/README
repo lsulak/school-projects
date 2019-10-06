@@ -1,0 +1,39 @@
+FLP - Funkcionalny projekt, varianta rka-2-dka
+
+Autor: Ladislav Šulák
+Login: xsulak04, 1MIT
+Kontakt: xsulak04@stud.fit.vutbr.cz
+Datum: 10.4.2016
+
+Popis: 
+  Projekt z funkcionalneho programovania do predmetu FLP - Determinizacia rozsireneho konecneho automatu.
+
+  Program je napisany v jazyku Haskell a sluzi pre konverziu rozsireneho konecneho automatu na deterministicky konecny automat.
+  Vstup prijima zo suboru alebo standardneho vstupu v predpisanom formate a vysledok zapise na standardny vystup.
+
+Zoznam suborov:
+  FsmMain.hs       - zdrojovy subor, obsahuje funkciu main
+  FsmDataTypes.hs  - zdrojovy subor, obsahuje datove struktury reprezentujuce konecny automat
+  FsmProcessing.hs - zdrojovy subor, vykonava cely vypocet determinizacie
+  Makefile         - subor pre preklad
+  README           - subor s popisom projektu
+
+Preklad:
+  pomocou Makefile, prikaz make prelozi program nasledovne:
+  ghc --make FsmMain.hs -o rka-2-dka
+
+Spustenie:
+  $ ./rka-2-dka {-t | -i } source
+  
+  povinny argument -f | -i       - prave 1 musi byt zadany, za nim moze nasledovat nazov vstupneho suboru 
+  volitelny argument source      - obsahuje RKA v predpisanom formate. V takom istom formate bude zapisany vystupny automat
+  
+Vystup:
+  Vo formate specifikovanom v zadani je na standardny vystup vypisany vysledny automat, jednotlivo po riadkoch:
+  <vsetky stavy>, <pociatocny stav>, <koncove stavy>, <pravidlo 1> ... <pravidlo n>  
+
+  Program konci s hodnotou 0 ak nedoslo k ziadnej chybe, alebo 1 ak chyba nastala, pripadne s prislusnou chybovou hlaskou.
+
+Zaver:
+  Program sice vykonava determinizaciu, avsak vyskytol sa problem s jej naslednym rekurzivnym volanim, najma kvoli casovej tiesni.
+  Kvoli tomu nie je vysledny automat pri prepinaci '-t' determinizovany, ale je identicky od vstupneho.

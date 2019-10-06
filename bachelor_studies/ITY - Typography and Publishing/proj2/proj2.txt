@@ -1,0 +1,148 @@
+ITY - Projekt è. 2 - Sazba dokumentù s matematickými výrazy
+-----------------------------------------------------------
+rozmìry stránky: A4
+rozmìry textové oblasti: 18x25cm
+mezera vlevo: 1.5cm
+mezera nahoøe: 2.5cm
+font: standardní 11pt (vzorový dokument pou¾ívá kódování fontù IL2)
+
+Poznámky: 
+- Na titulní stranì uveïte své jméno a aktuální datum (pomocí vhodného pøíkazu).
+
+- Pomlèky a spojovníky jsou v tomto textu zadány znakem -. V dokumentu musí být správná ¹íøka a mezery podle kontextu.
+
+- Vzorový dokument byl vysázen LaTeXem na ¹kolním serveru merlin tìmito nástroji: latex, dvips -t a4, ps2pdf (pozor na køí¾ové odkazy)
+  
+- Vzorce a nìkteré dal¹í elementy jsou v tomto textu nahrazeny tøemi teèkami. Øiïte se vzorovým dokumentem.
+
+- V definici 3.1 je pou¾ito prostøedí description* z balíku mdwlist.
+
+- Z AmS balíkù byly pou¾ity pøíkazy \newtheorem a \binom, plus dal¹í pøíkazy pro sázení speciálních symbolù.
+
+- Návì¹tí definic, algoritmù, vìt a dùkazù, dále èíslování nadpisù a vzorcù, stejnì jako vytváøení odkazù na nì je potøeba sázet pomocí vhodných LaTeXových  prostøedkù, nikoli ruènì.
+
+- Odevzdává se pouze zdrojový text dokumentu a soubor Makefile pro pøeklad. Oba soubory zabalte zipem a do informaèního systému odevzdejte archiv s názvem xlogin00-fit.zip (pou¾ijte svùj login a zkratku své fakulty; kromì zipu je akceptovatelný jen archiv tar+gzip, pak bude koncovka archivu .tar.gz).
+
+- Návod pro tvorbu jednoduchého Makefile: http://www.fit.vutbr.cz/ martinek/clang/make.html
+
+
+Text k vysázení
+---------------
+
+Vysoké uèení technické v Brnì
+Fakulta informaèních technologií
+
+Typografie a publikování - 2. projekt
+
+Sazba dokumentù s matematickými výrazy
+
+Aktuální datum          Va¹e Jméno Pøíjmení
+
+
+1 Úvod
+Tato úloha je zamìøena na sazbu titulní strany a textù, které obsahují matematické vzorce, rovnice (jako tøeba ..., ... a ...) a prostøedí (napøíklad definice ... na stranì ... v sekci ...).
+
+Na titulní stranì je vyu¾ito sázení nadpisu podle optického støedu s vyu¾itím zlatého øezu. Tento postup byl probírán na pøedná¹ce. Pro sazbu matematických elementù byly vyu¾ity balíky AmS-LaTeXu. 
+
+
+
+2 Plynulý matematický text
+Zásady pro sazbu matematiky v plynulém textu odpovídají zásadám pro smí¹enou sazbu. V LaTeXu si mù¾eme sazbu opakovaných symbolù a jejich posloupností zjednodu¹it zavedením vlastních pøíkazù.
+
+Pro mno¾inu ... oznaèuje ... kardinalitu ....
+Pro mno¾inu ... reprezentuje ... volný monoid generovaný mno¾inou ... s operací konkatenace.
+Prvek identity ve volném monoidu ... znaèíme symbolem ....
+Nech» .... Algebraicky je tedy ... volná pologrupa generovaná mno¾inou ... s operací konkatenace.
+Koneènou neprázdnou mno¾inu ... nazvìme abeceda.
+Pro ... oznaèuje ... délku øetìzce .... Pro ... oznaèuje ... poèet výskytù symbolù z ... v øetìzci ... a ... urèuje ...-tý symbol øetìzce ...; napøíklad ....
+
+
+
+3 Sazba definic a vìt
+Pro sazbu definic a vìt slou¾í balík amsthm.
+
+Definice 3.1. Bezkontextová gramatika je ètveøice ..., kde
+
+... je totální abeceda,
+... je abeceda terminálù,
+... je startující symbol,
+... je koneèná mno¾ina pravidel tvaru ..., kde ..., ... a ... je návì¹tí tohoto pravidla.
+
+Nech» ... znaèí abecedu neterminálù. Pokud ..., ..., ... provádí derivaèní krok z ... do ... podle pravidla ..., symbolicky pí¹eme ... nebo zjednodu¹enì ....
+Standardním zpùsobem definujeme ..., kde .... Dále definujeme tranzitivní uzávìr ... a tranzitivnì-reflexivní uzávìr ....
+
+
+Algoritmus mù¾eme uvádìt textovì, podobnì jako definice, nebo lze pou¾ít pseudokódu vysázeného ve vhodném prostøedí (napøíklad algorithm2e).
+
+
+Algoritmus 3.2. Ovìøení bezkontextovosti gramatiky.
+Mìjme gramatiku ....
+
+1. Pro ka¾dé pravidlo ... proveï test, zda ... na levé stranì obsahuje právì jeden symbol z ....
+2. Pokud v¹echna pravidla splòují podmínku z kroku ..., tak je gramatika ... bezkontextová.
+
+Definice 3.3. Jazyk definovaný gramatikou ... definujeme jako ....
+
+
+3.1 Podsekce obsahující vìtu
+Vìty a definice mohou mít vzájemnì nezávislé èíslování. Dùkaz se obvykle uvádí hned za vìtou.
+
+Definice 3.4. Nech» ... je libovolný jazyk. ... je bezkontextový jazyk, kdy¾ a jen kdy¾ ..., kde ... je libovolná bezkontextová gramatika.
+
+Definice 3.5. Mno¾inu ... nazýváme tøídou bezkontextových jazykù.
+
+
+Vìta 1. Nech» .... Platí, ¾e ....
+
+Dùkaz. Dùkaz se provede pomocí Pumping lemma pro bezkontextové jazyky a je zøejmý, co¾ implikuje pravdivost vìty ....
+
+
+
+4 Rovnice a odkazy
+Slo¾itìj¹í matematické formulace sázíme mimo plynulý text. Lze umístit nìkolik výrazù na jeden øádek, ale pak je tøeba tyto vhodnì oddìlit, napøíklad pøíkazem \quad.
+
+...
+
+
+V rovnici ... jsou vyu¾ity tøi typy závorek s rùznou explicitnì definovanou velikostí.
+
+...
+
+V této vìtì vidíme, jak vypadá implicitní vysázení limity ... v normálním odstavci textu. Podobnì je to i s dal¹ími symboly jako ... èi ....
+V pøípadì vzorce ... jsme si vynutili ménì úspornou sazbu pøíkazem \limits.
+
+...
+
+Odkazy na èíslované rovnice nebo matematické výrazy se mohou v textu vyskytovat jak pøed, tak i za jejich výskytem. Proto¾e se rovnice èíslují pomocí èísel v kulatých závorkách, mìly by mít tuto podobu i odkazy na nì.
+
+
+
+5 Slo¾ené zlomky
+Pøi sázení slo¾ených zlomkù dochází ke zmen¹ování pou¾itého písma v èitateli a jmenovateli. Toto chování není v¾dy ¾ádoucí, proto¾e nìkteré zlomky potom mohou být obtí¾nì èitelné.
+
+V tìchto pøípadech je mo¾né nastavit standardní stupeò písma v podvýrazech ruènì pomocí pøíkazu \displaystyle u vysázených vzorcù nebo pomocí \textstyle u vzorcù, které jsou souèástí textu. Srovnejte:
+
+...
+
+
+Tento postup lze pou¾ít nejen u zlomkù.
+
+...
+
+6 Matice
+
+Pro sázení matic se velmi èasto pou¾ívá prostøedí array a závorky (\left, \right). Tyto pøíkazy v¾dy tvoøí pár a nelze je pou¾ít samostatnì.
+
+...
+
+...
+
+...
+
+Prostøedí array lze úspì¹nì vyu¾ít i jinde.
+
+...
+
+Závìrem
+V pøípadì, ¾e budete potøebovat vyjádøit matematickou konstrukci nebo symbol a nebude se Vám daøit jej nalézt v samotném LaTeXu, doporuèuji prostudovat mo¾nosti balíku maker AmS-LaTeX.
+Analogická pouèka platí obecnì pro jakoukoli matematickou konstrukci v TeXu.

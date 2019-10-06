@@ -1,0 +1,62 @@
+%======================================
+% Ladislav Sulak
+%======================================
+% encoding: iso-8859-2 (to change use commands iconv, recode or cstocs)
+
+\documentclass[12pt]{documentation}
+\usepackage[latin2]{inputenc}
+\usepackage[T1, IL2]{fontenc}
+\usepackage{mathptmx}
+
+\usepackage{url}
+\makeatletter
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\g@addto@macro{\UrlBreaks}{%
+\do\/\do\d%	
+}
+\makeatother
+
+\DeclareUrlCommand\url{\def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}}
+
+\usepackage{array}
+\usepackage{longtable}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\usepackage{makecell}
+\renewcommand{\arraystretch}{1.60}
+
+\ifx\pdfoutput\undefined % not running under pdflatex
+\else
+  \usepackage{color}
+  \usepackage[unicode,colorlinks,hyperindex,plainpages=false,pdftex]{hyperref}
+  \definecolor{links}{rgb}{0.4,0.5,0}
+  \definecolor{anchors}{rgb}{1,0,0}
+  \def\AnchorColor{anchors}
+  \def\LinkColor{links}
+  \def\pdfBorderAttrs{/Border [0 0 0] }  % No margins aroung references/links.
+  \pdfcompresslevel=9
+\fi
+
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.0cm, right=2.0cm]{geometry}
+
+\hypersetup{
+  linkcolor = blue
+}
+
+\projectinfo{
+  project=OP,
+  month=11, 
+  year=2017,
+  title={\centerline{Literature Review and Systematic Literature Review} \\\centerline{(Homework 2)}},
+  subject={\centerline{Project Management and Research Methodologies}},
+  author={Ladislav ©ulák},	
+  email={er1281@edu.teicrete.gr},
+  institute={Technical Educational Institute of Crete}
+}
+\begin{document}
+  	\maketitle
+	\input{content} % content.tex
+	\bibliographystyle{plain}
+  	\begin{flushleft}
+ 		\bibliography{literature} % literature.bib
+  	\end{flushleft}
+\end{document}

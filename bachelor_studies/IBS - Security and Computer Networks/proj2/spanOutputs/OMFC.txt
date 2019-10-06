@@ -1,0 +1,34 @@
+
+% OFMC
+% Version of 2006/02/13
+SUMMARY
+  UNSAFE
+DETAILS
+  ATTACK_FOUND
+PROTOCOL
+  C:\progra~1\SPAN\testsuite\results\hlpslGenFile.if
+GOAL
+  secrecy_of_sec_1
+BACKEND
+  OFMC
+COMMENTS
+STATISTICS
+  parseTime: 0.00s
+  searchTime: 0.01s
+  visitedNodes: 1 nodes
+  depth: 1 plies
+ATTACK TRACE
+i -> (alice,3): start
+(alice,3) -> i: alice.bob
+i -> (bob,3): {x246.alice.x247}_x245
+(bob,3) -> i: {Nb(2)}_x246
+i -> (i,17): x246
+i -> (i,17): x246
+
+
+% Reached State:
+% 
+% secret(x246,sec_1,set_85)
+% state_role_B(bob,alice,server,dec,1,x245,x247,x246,Nb(2),set_85,set_86,3)
+% state_role_A(alice,bob,server,dec,1,dummy_sk,dummy_sk,dummy_nonce,dummy_sk,dummy_nonce,set_92,set_93,3)
+% state_role_S(server,alice,bob,dec,0,dummy_sk,dummy_nonce,dummy_sk,dummy_sk,set_74,3)

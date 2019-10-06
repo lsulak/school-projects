@@ -1,0 +1,67 @@
+ISA - Monitorování hlaviček HTTP
+
+Autor: Ladislav Šulák
+Login: xsulak04, 3BIT
+Kontakt: xsulak04@stud.fit.vutbr.cz
+Datum: 25.11.2014
+
+Popis: 
+Projekt do predmetu ISA - Sietove aplikacie
+
+Program sluzi pre monitorovanie HTTP hlaviciek odoslanych v dotazoch klienta.
+
+Program dokaze monitorovat provoz na urcitom zariadeni, 
+v tom pripade bezi v nekonecnej smycke.
+Pre prerusenie je nutne vyuzit jeden zo signalov SIGINT, SIGQUIT, SIGTERM.
+
+Program dokaze spracovat aj .pcap subor, v tom pripade skonci s navratovou hodnotou 0.
+
+Program je napisany v jazyku C++, je spustitelny na operacnych systemoch Linux,
+bol vyvijany a testovany na operacnom systeme ISA2014, postavenom na systeme Ubuntu 14.04.
+
+Bez pristupu s pravami roota program nejde spustit, odchytavat pakety na zariadeni nebude povolene.
+
+Pouziva kniznicu pre pracu s odchytavanim paketov -  libpcap (http://www.tcpdump.org/)
+a kniznicu pre pracu s XML - libxml2 (http://www.xmlsoft.org/) 
+
+Zoznam suborov:
+  httphdrs.cpp  - zdrojovy subor 
+  Makefile      - subor pre preklad
+  README        - subor s popisom projektu
+  manual.pdf    - dokumentacia
+
+Preklad:
+  pomocou Makefile, prikaz make prelozi program nasledovne:
+  g++ -Wall -Wextra -pedantic httphdrs.cpp -o httphdrs -lpcap -lxml2 -I/usr/include/libxml2
+
+Spustenie:
+  $ ./httphdrs {-f | -i } source [-H header1,header2,headern] [-p 80,8080] -o output --help
+  
+  povinny argument -f | -i     - prave 1 musi byt zadany, za nim musi nasledovat 
+  povinny argument source      - odchytava pakety na danom zariadeni(-i) alebo zo suboru (-f)
+  
+  volitelny argument -H [...]  - argument -H urcuje, ze sa program ma spustit s 
+                                 inymi nez implicitnymi hodnotami HTTP hlaviciek,
+                                 ktore su: User-Agent,Accept,Accept-Encoding,Accept-Language.
+                                 Zoznam hlaviciek nasleduje hned za parametrom -H,
+                                 musi byt bez medzier a oddeleny ciarkami.
+
+  volitelny argument -p [...]  - argument -p urcuje, ze sa program ma spustit s 
+                                 inou nez implicitnou hodnotou portu 80. 
+                                 Cislo(1-n) portu nasleduje hned za parametrom -p,
+                                 musi byt bez medzier a oddeleny ciarkami.
+  povinny argument -o          - specifikuje, ze nasledujuci argument bude udavat nazov vystupneho suboru
+
+  volitelny argument --help    - zobrazi napovedu k programu  
+
+  Vystup:
+    Program do suboru zadaneho argumentom '-o output' vypise XML elementy reprezentujuce informacie o spojeni (TCP):
+    IP adresu zdrojoveho zariadenia, port zdrojoveho zariadenia (pre kazdy paket), a dane HTTP hlavicky s ich hodnotami.
+    
+    Program spracuje aj take spojenia ktore su dotazmi klienta, no maju prazdnu hlavicku. 
+    V tomto pripade sa zapise prazdny element connection nasledovany cislom portu.
+    Program akceptuje nasledovne poziadavky zo strany klienta:
+    OPTIONS, GET, HEAD, PUT, POST, DELETE, TRACE, CONNECT.
+    UDP pakety sa nespracovavaju (su odfiltrovane), program pracuje s IP verziami IPv4 i IPv6. 
+
+    Program konci s hodnotou 0 ak nedoslo k ziadnej chybe, alebo 1 ak chyba nastala, s prislusnou chybovou hlaskou.

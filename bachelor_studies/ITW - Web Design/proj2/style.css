@@ -1,0 +1,393 @@
+@charset "UTF-8";
+
+/*
+	Projekt č.2 do predmetu ITW
+	Autor: Ladislav Šulák, 2BIB
+	Login: xsulak04
+	Dátum: 5/2014
+	Mail: xsulak04@stud.fit.vutbr.cz
+*/
+
+body 
+{
+	font-family: Arial, Tahoma, sans-serif;
+	font-size: 12pt;
+	margin:0 auto;
+	min-width: 640px;
+	max-width: 800px;
+	background: url(img/background.jpg) no-repeat;
+    background-attachment: fixed;
+    background-color:  #FFFFFF;
+    background-position: top;
+    margin-top:-20px
+}
+
+#page 
+{
+	background-color: #FEF9F5;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+#hh1
+{
+	padding-top: 130px;
+	padding-right: 80px;
+	text-align: center;
+	color: #E0E0E0;
+	text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+
+#hh1 a
+{ 
+ 	text-decoration: none;
+ 	color: #D8D8D8;
+}
+
+#hh2
+{
+	padding-right: 80px;
+	color: #E0E0E0;
+	text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+
+#head
+{ 
+	background-image: url(img/logo.jpg);
+	background-repeat: no-repeat;
+	margin-top: -25px;
+	margin-bottom: -287px;
+    height:600px;
+    width: 700px;	
+}
+
+h2
+{
+	text-align: center
+}
+
+h3
+{
+	text-align: center
+}
+
+dl 
+{
+	text-align: center
+}
+
+div.kategorie
+{
+	text-align: center
+}
+
+#adresa
+{
+	text-align: center
+}
+
+.navigation
+{
+	list-style: none;
+	padding-left: 0px; 
+	padding-bottom: 75px;
+	margin-right: -220px;
+}
+
+.navigation li a
+{
+	color: black;
+	float:left;
+	margin-left: -100px;
+	min-width: 200px;
+	max-width: 200px;
+}
+
+.subnavigation
+{
+	white-space: nowrap;
+	list-style: none;
+	padding-left: 0px; 
+	padding-right: 0px;
+}
+
+.nav 
+{ 
+	background-color: #00CC33;
+	text-decoration: none;
+	font-size: 20pt;
+	border: solid black;
+ 	border-width: 2px 2px 2px 2px;
+ 	padding-left: 46px;
+	padding-right: 25px;
+} 
+
+li ul.subnavigation
+{
+    display: none;
+    margin-top: 35px;
+} 
+
+.navigation li
+{
+	display: block;
+    float: left;
+}
+
+ul.subnavigation li a 
+{
+	min-width: 170px;
+	max-width: 170px;
+	padding-right: 0px;
+    color: black;
+    font-size: 15pt;
+}
+
+#uvod li a.nav
+{
+	min-width: 72px;
+	max-width: 72px;
+}
+
+#produkty li a.nav
+{
+	min-width: 72px;
+	max-width: 72px;
+}
+
+#onas li a.nav
+{
+	min-width: 72px;
+	max-width: 72px;
+}
+
+ul.subnavigation li a.nav
+{
+	padding-left: 48px;
+	padding-right: 53px;
+}
+
+ul.subnavigation li a:hover 
+{
+	background-color: white;
+}
+
+li:hover ul.subnavigation 
+{
+	display: block;
+    position: absolute;
+    width: 100px;
+}
+
+#kontakty ul.subnavigation
+{
+	padding-left: 465px;
+}
+
+p.image 
+{
+	text-align: center;
+}
+
+#novinky
+{
+	text-align: center;
+	border:0.1pt dashed;
+	border-radius: 5px;
+	border-color: green;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#click_box
+{
+	padding-top: 30px;
+}
+
+#click_box p
+{
+	margin-right: 175px;
+	margin-left: 175px;
+}
+
+
+#right_img
+{
+	padding-top: 10px;
+	padding-right: 300px;
+	margin-bottom: -115px;
+}
+
+#left_img
+{
+	padding-left: 300px;
+	margin-top: -80px;
+}
+
+#hidden
+{
+	padding: 20px;
+	margin: 10px;
+	background: rgba(252,252,252,1);
+	background: -moz-linear-gradient(top, rgba(252,252,252,1) 0%, 
+		rgba(252,252,252,1) 9%, rgba(226,226,226,1) 28%, 
+		rgba(209,209,209,1) 46%, rgba(219,219,219,1) 58%, 
+		rgba(254,254,254,1) 93%, rgba(254,254,254,1) 100%);
+
+	background: -webkit-gradient(left top, left bottom,
+	 color-stop(0%, rgba(252,252,252,1)), color-stop(9%, rgba(252,252,252,1)),
+	 color-stop(28%, rgba(226,226,226,1)), color-stop(46%, rgba(209,209,209,1)), 
+	 color-stop(58%, rgba(219,219,219,1)), color-stop(93%, rgba(254,254,254,1)),
+	 color-stop(100%, rgba(254,254,254,1)));
+
+	background: -webkit-linear-gradient(top, rgba(252,252,252,1) 0%,
+		rgba(252,252,252,1) 9%, rgba(226,226,226,1) 28%, 
+		rgba(209,209,209,1) 46%, rgba(219,219,219,1) 58%, 
+		rgba(254,254,254,1) 93%, rgba(254,254,254,1) 100%);
+
+	background: -o-linear-gradient(top, rgba(252,252,252,1) 0%, 
+		rgba(252,252,252,1) 9%, rgba(226,226,226,1) 28%, 
+		rgba(209,209,209,1) 46%, rgba(219,219,219,1) 58%, 
+		rgba(254,254,254,1) 93%, rgba(254,254,254,1) 100%);
+
+	background: -ms-linear-gradient(top, rgba(252,252,252,1) 0%, 
+		rgba(252,252,252,1) 9%, rgba(226,226,226,1) 28%, 
+		rgba(209,209,209,1) 46%, rgba(219,219,219,1) 58%, 
+		rgba(254,254,254,1) 93%, rgba(254,254,254,1) 100%);
+
+	background: linear-gradient(to bottom, rgba(252,252,252,1) 0%, 
+		rgba(252,252,252,1) 9%, rgba(226,226,226,1) 28%,
+		rgba(209,209,209,1) 46%, rgba(219,219,219,1) 58%,
+		rgba(254,254,254,1) 93%, rgba(254,254,254,1) 100%);	
+}
+
+#mapastranky
+{
+	padding-left: 150px;
+	margin-bottom: 100px;
+}
+
+#mapastranky ul.m_navigation li a.m_nav
+{
+	color:black;
+	font-size: 15pt;
+	text-decoration: none;
+}
+
+#mapastranky ul.m_navigation li a.m_nav:hover
+{
+	text-decoration: underline;
+}
+
+#map_canvas
+{
+	margin-left: -75px;
+  	width: 750px;
+	height: 600px;
+}
+
+#map_canvas2 
+{
+	margin-left: 50px;
+  	width: 480px;
+	height: 360px;
+}
+
+#produkty_text ul li.none
+{
+	list-style: none;
+}
+
+ul.on-page
+{
+	padding-left: 140px;
+}
+
+ul.off-page
+{
+	padding-left: 140px;
+}
+
+div.zoznam
+{
+	padding-bottom: 100px;
+	padding-left: 160px;
+	font-style: italic;
+
+}
+div.zoznam ul
+{
+	list-style-type:square;
+}
+
+@media print 
+{
+	#menu ul.navigation
+	{
+		display: none;
+	}
+	#menu
+	{
+		display: none;
+	}
+	#prefoot
+	{
+		display: none;
+	}
+	#foot
+	{
+		display: none;
+	}
+}
+
+#zapatie
+{
+	margin-top: 75px;
+	margin-left: -100px;
+	margin-right: -100px;
+	border:2px solid;
+	border-radius: 6px;
+}
+
+#prefoot
+{
+	padding-top: 2px;
+	padding-bottom: 2px;
+ 	background-color: #009900;
+	text-align: center;
+}
+
+#prefoot a
+{
+	text-decoration: none;
+ 	color:#D8D8D8;
+}
+
+#prefoot a:hover
+{
+ 	color: white;
+ 	text-decoration: underline;
+}
+
+#foot
+{
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #006600;
+	color: #E0E0E0;
+}
+
+#foot #left
+{
+ 	margin-left: 20px;
+}
+
+#foot #right
+{
+	margin-left: 350px;
+}
+
+div.shift
+{
+	padding-bottom: 150px;
+}

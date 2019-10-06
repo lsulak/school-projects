@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Location based service project</title>
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Indie+Flower" />
+        <style>
+            body {
+                background-image: url("img/bg.jpg");
+            }
+
+            h1 {
+                text-align: center;
+                color: #005;
+                font: 100 35px "Indie Flower", Helvetica, sans-serif;
+                text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 3px 3px 0px rgba(0,0,0,0.05);
+            }
+            
+            #imgs_container {
+                float:left;
+            }
+
+            #remote_username {
+                height: 25px;
+                color: #005;
+                font: 100 20px "Indie Flower", Helvetica, sans-serif;
+                text-shadow: 1px 1px 0px rgba(0,0,0,0.1), 1px 1px 0px rgba(0,0,0,0.05);
+            }
+
+            #chat_zone strong {
+                color: white;
+                background-color: black;
+                padding: 1.5px;
+            }
+
+            .left-chat-zone {
+                color: #005;
+                font: 100 19px "Indie Flower", Helvetica, sans-serif;
+                text-shadow: 1px 1px 0px rgba(0,0,0,0.1), 1px 1px 0px rgba(0,0,0,0.05);
+                border-style: groove;
+                display: block;
+                margin-left: 8%;
+                padding: 0;
+                width: 38%;
+                margin-bottom: 1%;
+            }
+
+            #conference {
+                margin-left: 50%;
+                margin-top: -58%;
+            }
+
+            #radius {
+                margin-bottom: 1%;
+            }
+
+            #google-map {
+                width: 450px;
+                height: 250px;
+            }
+
+            #callButton {
+                display: block;
+                margin-top: 1%;
+                margin-left: 22.5%;
+                padding: 2%;
+                background: red;
+                color: white;
+                border: 2px solid darkblue;
+                border-radius: 10px;
+            }
+
+            @media (min-width:1151px) {
+                #left-screenshot-zone {
+                    margin-left: 8%;
+                    margin-bottom: 1%;
+                }
+
+                #nickname {
+                    width: 14.7%;
+                }
+
+                #chat_form #message {
+                    margin-left: 2%;
+                    width: 77%;
+                }
+
+                .myBox {
+                    width: 100%;
+                    height: 450px;
+                    overflow: auto;
+                }
+
+                #sendButton {
+                    width: 15%;
+                    margin-left: 1%;
+                }
+
+                .right-video-zone {
+                    margin-top: 1%;
+                    margin-left: 50%;
+                    padding: 0;
+                }
+
+                #radius {
+                    margin-top: 6%;
+                }
+
+                #captureImageButton {
+                    padding: 4px;
+                    margin-left: 56%;
+                    margin-top: -10%;
+                }
+            }
+
+            @media (max-width:1150px) {
+                #nickname {
+                    margin-left: 5%;
+                    margin-top: 20%;
+                    margin-bottom: 1%;
+                }
+
+                .left-chat-zone {
+                    margin-left: 5%;
+                    padding: 0;
+                    width: 40%;.
+                    margin-bottom: 1%;
+                }
+
+                #connectButton {
+                    margin-top: 3px;
+                }
+
+                #sendButton {
+                    width: 15%;
+                }
+
+                #chat_form #message {
+                    margin-left: 1%;
+                    width: 79%;
+                }
+
+                .myBox {
+                    width: 100%;
+                    height: 320px;
+                    overflow: auto;
+                }
+
+                #radius {
+                    margin-top: 5%;
+                }
+
+                #google-map {
+                    width: 320px;
+                    height: 250px;
+                }
+                
+                .right-video-zone {
+                    margin-left: 50%;
+                    margin-bottom: 0;
+                }
+
+                #callButton {
+                    margin-left: 23%; 
+                }
+                
+                #captureImageButton {
+                    padding: 4px;
+                    margin-left: 58%;
+                    margin-top: -35%;
+                }
+            }
+            @media (max-width:940px) {
+                .imgs_container img {
+                    width: 43.5%;
+                }
+
+                #left-screenshot-zone {
+                    margin-left: 5%;
+                    margin-bottom: 1%;
+                }
+                
+                #nickname {
+                    width: 31.5%;
+                    margin: 0;
+                }
+
+                #chat_form #message {
+                    margin-left: 1%;
+                    width: 76%;
+                }
+
+                #sendButton {
+                    width: 18%;
+                }
+
+                #radius {
+                    margin-top: 15%;
+                }
+
+                #captureImageButton {
+                    padding: 4px;
+                    margin-left: 60%;
+                    margin-top: -55%;
+                }
+
+                #callButton {
+                    margin-left: 25%; 
+                }
+            }
+
+        </style>
+    </head>
+ 
+    <body>
+        <h1>Location-based service project</h1>
+
+        <div id="left-screenshot-zone">
+            <div class="imgs_container">
+                <img id="local_screenshot" width="253" height="190" src="img/no_pic.jpg">
+                <img id="remote_screenshot" width="253" height="190" src="img/no_pic.jpg">
+            </div>
+
+            <input type="text" name="message" id="nickname" placeholder="enter your name" autofocus />
+            <input type="submit" id="connectButton" value="Connect" onclick="connect()"/>
+            
+            <label type="text" id="remote_username" placeholder="nickname" size="20" autofocus>Remote user: n/a</label>
+        </div>
+
+        <div class="left-chat-zone">
+            <form action="/" method="post" id="chat_form">
+                <input type="text" name="message" id="message" placeholder="Enter Message Here" autofocus />
+                <input type="submit" id="sendButton" value="Send" />
+            </form>
+
+            <div class="myBox">
+                <section id="chat_zone"></section>
+            </div>
+        </div>
+
+        <div id="conference">
+            <input type="text" name="radius" id="radius" onkeyup="checkRadius()" placeholder="Radius: XX meters" size="20" autofocus />
+            <div id="google-map"></div>
+            <div>
+                <button id="callButton" class="center-v button_base b09_electric" style="display:none">Accept/Stop conference</button>
+            </div>
+        </div>
+     
+        <div class="right-video-zone">
+            <video id="localVideo" width="260" height="250" autoplay> </video>
+            <video id="remoteVideo" width="260" height="250" autoplay> </video> 
+        </div>
+
+        <button id="captureImageButton" onclick="captureImage()">Capture image</button>       
+        <script src="jquery-1.10.1.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+
+
+        <script type="text/javascript">
+            function connect() {
+                my_username = $('#nickname').val();
+                socket.emit("new_client", my_username);
+
+                my_location[2] = my_username;
+                socket.emit("position_in_map", my_location);
+
+                document.getElementById("sendButton").disabled = false;
+                document.getElementById("captureImageButton").disabled = false;
+            };
+
+            function call() {
+
+                if (!offer_came && !call_answered) 
+                {
+                    if(pc.iceConnectionState == "closed") 
+                    {
+                        console.log("1");
+                        pc = new RTCPeerConnection({"iceServers": []});
+                        pc.addStream(localStream);
+                        console.log(pc);
+                    }
+                    console.log("2");
+                    pc.createOffer(function (description) {
+                        $('#chat_zone').prepend('<p style="color:black;"><em>CONFERENCE OFFER SENT</em></p>');
+
+                        pc.setLocalDescription(new SessionDescription(description), function(){ console.log("failure callback"); });
+
+                        socket.emit("video call", {type: "offer", "description": description});
+                    }, function(){ console.log("failure callback"); });
+
+                } 
+                else if (offer_came && !call_answered) 
+                {console.log("3");
+                    console.log("Trying to answer...");
+                    incoming_call_beep.pause();
+                    incoming_call_beep.currentTime = 0;
+
+                    pc.createAnswer(
+                            function(description) {
+                                pc.setLocalDescription(new SessionDescription(description));
+                                socket.emit("video call", {type: "answer", "description": description});
+                                call_answered = true;
+                                offer_came = false;
+                                $('#chat_zone').prepend('<p style="color:black;"><em>CONFERENCE CONFIRMED</em></p>');
+                            },
+                            function() {console.log("failure callback")}
+                        );
+                } 
+                else if (call_answered) 
+                {console.log("4");
+                     $('#chat_zone').prepend('<p style="color:black;"><em>CONFERENCE CLOSED</em></p>');
+                    socket.emit("video call", {type: "close", "description": null})
+                    call_answered = false;
+                    pc.close();
+                }
+            };
+
+            function captureImage() {
+                screen_canvas.width = localVideo.videoWidth * 0.3;
+                screen_canvas.height = localVideo.videoHeight * 0.3;
+                screen_canvas.getContext('2d').drawImage(localVideo, 0, 0, screen_canvas.width, screen_canvas.height);
+         
+                my_picture.src = screen_canvas.toDataURL();
+
+                socket.emit("new_profile_picture", {username: my_username, new_profile_picture: screen_canvas.toDataURL()});
+            };
+ 
+            function initMap() {
+                var map_canvas = document.getElementById("google-map");
+                var mapOptions = {
+                    center: new google.maps.LatLng(my_location[0], my_location[1]),
+                    zoom: 2,
+                    mapTypeId: google.maps.MapTypeId.HYBRID
+                };
+
+                var map = new google.maps.Map(map_canvas, mapOptions);
+
+                var marker;
+                var marker_title = "";
+                var locations = [my_location, opponent_location];
+
+                for (var i = 0; i < locations.length; i++) {  
+                    if (locations[i].length == 0)
+                        continue;
+
+                    if (locations[i][2].length == 0)
+                        marker_title = "n/a";
+                    else
+                        marker_title = locations[i][2];
+
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+                        map: map,
+                        title: marker_title
+                    });
+
+                    google.maps.event.addListener(marker, "click", (function(marker, i) {
+                        return function() {
+                            infowindow.setContent(locations[i][2]);
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+                }
+            };
+
+            function checkRadius() {
+                if (opponent_location.length == 0)
+                    return;
+                
+                var my_cord = new google.maps.LatLng(my_location[0], my_location[1]);
+                var op_cord = new google.maps.LatLng(opponent_location[0], opponent_location[1]);
+
+                var actualDistance = google.maps.geometry.spherical.computeDistanceBetween(my_cord, op_cord);
+
+                if (isNaN(radius.value))
+                    alert("Wrong input, use numbers.")
+                else 
+                {
+                    if (actualDistance <= Number(radius.value))
+                    {
+                        callButton.style.display = "block";
+                        socket.emit("in_radius", true);
+                    } 
+                    else
+                        callButton.style.display = "none";
+                }
+            };
+
+            function getRandomFloat(min, max) {
+                return Math.random() * (max - min) + min;
+            };
+
+            function gotStream (stream) {   
+                localVideo.src = window.URL.createObjectURL(stream);
+                localStream = stream;
+                callButton.disabled = false;  // we got stream, we can connect now
+                pc.addStream(stream);console.log("5");
+            };
+
+            // Adds a message to the common chat board.
+            function insertMessage (username, message) {
+                $("#chat_zone").prepend("<p><strong>" + username + "</strong> says: " + message + "</p>");
+            }
+
+        </script>
+
+        <script type="text/javascript">
+        
+            /* ################## CHAT CODE ################## */
+            // Connecting to socket.io
+            var socket = io.connect("https://192.168.1.4:443");  // "https://192.168.1.4:443" or "212.251.17.119:443"
+
+            // The username is requested, sent to the server and displayed in the title.
+            var my_username = "";
+
+            var screen_canvas = document.createElement("canvas");
+            var my_picture = document.getElementById("local_screenshot");
+            var opponent_picture =  document.getElementById("remote_screenshot");
+
+            var incoming_call_beep = new Audio("incoming_call.mp3");
+
+            var call_answered = false;
+            var offer_came = false;
+
+            // Focused on Euro-Asia
+            var my_location = [getRandomFloat(0,65), getRandomFloat(-30,125), my_username];
+            var opponent_location = []; 
+
+            document.getElementById("sendButton").disabled = true;
+            document.getElementById("callButton").disabled = true;
+            document.getElementById("captureImageButton").disabled = true;
+
+            // When a message is received it's inserted in the page.
+            socket.on("message", function (data) {
+                insertMessage(data.username, data.message)
+            });
+
+            // When a new client connects, the information is displayed.
+            // Also, if there is no opponent, it means that only 1 user is connected.
+            // If another one will connect, it means that this will be the opponent.
+            // His name will be saved.
+            socket.on("new_client", function (username) {
+                $("#chat_zone").prepend("<p><em>" + username + " has joined the chat!</em></p>");
+
+                $("#remote_username").text("Remote user: " + username);
+                initMap();
+            });
+
+            // When a new client connects, the information is displayed in common chat board.
+            socket.on("client_left", function (username) {
+                $("#chat_zone").prepend("<p><em>" + username + " has left!</em></p>");
+                $("#remote_username").text("Remote user: n/a");
+                opponent_location = [];
+                initMap();
+            });
+
+            socket.on("new_profile_picture", function (data) {
+                opponent_picture.src = data.new_profile_picture;
+            });
+
+            socket.on("position_in_map", function (location) {
+                opponent_location = location;
+                initMap();
+            });
+
+            socket.on("old_user_data", function (data) {
+                $("#remote_username").text("Remote user: " + data.username);
+                
+                if (data.profile_picture.length > 0)
+                    opponent_picture.src = data.profile_picture;
+
+                if (data.location.length > 0) {
+                    opponent_location = data.location;
+                    initMap();
+                }
+            });
+
+            socket.on("in_radius", function (is_in_range) {
+                if (is_in_range)
+                    callButton.style.display = "block";
+            });
+
+            // When the form is submitted, the message is sent and displayed on the page.
+            $("#chat_form").submit(function () {
+                var message = $("#message").val();
+
+                if (message.length > 0) {
+                    socket.emit("message", message); // Sends the message to the others
+                    insertMessage(my_username, message); // Also displays the message on our page
+                }
+                $("#message").val('').focus(); // Empties the chat form and puts the focus back on it
+                return false; // Blocks 'classic' sending of the form
+            });
+
+            /* ################## VIDEO CODE ################## */
+            var localStream;
+
+            var localVideo = document.getElementById("localVideo");  
+            var remoteVideo = document.getElementById("remoteVideo");
+
+            var callButton = document.getElementById("callButton");
+
+            // we are waiting for loading streams - if they are not available, we
+            // cannot connect anyway.
+            callButton.disabled = true;
+            callButton.onclick = call;
+
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
+            navigator.getUserMedia({audio:true, video:true}, gotStream, // both audio and video
+                function (error) { console.log(error); });
+                
+            var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+            var SessionDescription = window.RTCSessionDescription || window.mozRTCSessionDescription || window.webkitRTCSessionDescription;
+            var pc = new RTCPeerConnection({"iceServers": []});
+
+            pc.onicecandidate = function (event) {
+                // console.log(event);
+                console.log("6");
+                if (!event || !event.candidate) 
+                    return;
+                else
+                    socket.emit("video call", {type: "iceCandidate", "candidate": event.candidate});
+            };
+
+            pc.oniceconnectionstatechange = function(event) {
+                console.log("7");
+                if (pc.iceConnectionState === "failed" ||
+                    pc.iceConnectionState === "disconnected" ||
+                    pc.iceConnectionState === "closed") {
+                    // Handle the failure
+
+                    pc = new RTCPeerConnection({"iceServers": []});
+                    callButton.disabled = true;
+                    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+                    navigator.getUserMedia({audio:true, video:true}, gotStream, //note that we are adding both audio and video
+                        function(error) {
+                            console.log(error);
+                        });
+                }
+            };
+
+            var remoteStream;
+            pc.onaddstream = function (event) {console.log("8");
+                remoteStream = event.stream;
+                var remoteVideo = document.getElementById("remoteVideo");
+                remoteVideo.src = window.URL.createObjectURL(event.stream);
+                remoteVideo.play();
+            };
+
+            socket.on("video call", function (data) {
+                switch(data.type) {
+                    case "iceCandidate":
+                        console.log("case : iceCandidate");
+                        pc.addIceCandidate(new RTCIceCandidate(data.candidate));
+                        break;
+                    
+                    case "offer":
+                        console.log("case : offer");
+                        pc.setRemoteDescription(new SessionDescription(data.description), function() { 
+                            console.log("failure callback"); 
+                            });
+
+                        $('#chat_zone').prepend('<p style="color:black;"><em>CONFERENCE OFFER RECEIVED</em></p>');
+                        offer_came = true;
+                        incoming_call_beep.play();
+                    break;
+
+                    case "answer":
+                        console.log("case : answer");
+                        pc.setRemoteDescription(new SessionDescription(data.description),function(){ console.log("failure callback"); });
+
+                        $('#chat_zone').prepend('<p style="color:black;"><em>CONFERENCE ACCEPTED</em></p>');
+                        call_answered = true;
+                        offer_came = false;
+                        break;
+
+                    case "close":
+                        console.log("case : close");
+                        $('#chat_zone').prepend('<p style="color:black;"><em>CONFERENCE CLOSED<em></p>');
+                        call_answered = false;
+                        offer_came = false;
+                        pc.close();
+                    break;
+                }
+            });
+
+        </script>
+
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEAcmFKytxnUxGWmyPq2x8dKxRq26heOo&callback=initMap">
+        </script>
+        <script src="https://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>  
+
+    </body>
+</html>

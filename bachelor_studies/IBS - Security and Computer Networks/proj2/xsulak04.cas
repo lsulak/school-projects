@@ -1,0 +1,29 @@
+
+protocol LoweModifiedDenningSaccoSharedKey;
+identifiers
+A, B, S 	: user;
+Nb,T 		: number; % Nonces nahodne vygenerovany a casove razitko vygenerovane Serverom
+Kas, Kbs, Kab 	: symmetric_key;
+Dec 		: function; % Funkcia pre modifikaciu noncesu
+
+% Spravanie protokolu - bezna reprezentacia
+messages
+1. A -> S 	: A, B
+2. S -> A 	: {B, Kab, T, {Kab, A, T}Kbs}Kas
+3. A -> B 	: {Kab,A, T}Kbs
+4. B -> A 	: {Nb}Kab
+5. A -> B 	: {Dec(Nb)}Kab
+
+% Vstupne vedomosti, kazdy pozna kazdeho + algoritmus pre modifikaciu noncesu (funkcia Dec)
+knowledge
+A	: A,B,S,Dec;
+B	: A,B,S,Dec;
+S	: A,B,S,Dec;
+
+% Entity v relacii: A,B,S kluce a funkcia pre zmenu cisla nonces
+session_instances
+ [A:alice,B:bob,S:server,Kas:key1,Kbs:key2,Dec:dec];
+
+% Ciel
+goal
+ secrecy_of Kab [];

@@ -1,0 +1,121 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2"/>
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<h1>Knihovna1</h1> 
+<h2>2014/2015</h2>
+<dl>
+	<dt>Autoři</dt>
+	<dd>Ladislav Šulák
+	    <a href="mailto:xsulak04@stud.fit.vutbr.cz">xsulak04@stud.fit.vutbr.cz</a> -
+		Uživatelské rozhraní (Html, CSS, Javascript) a PHP skripty
+	</dd>
+	<dd>Petr Švaňa 
+	    <a href="mailto:xsvana00@stud.fit.vutbr.cz">xsvana00@stud.fit.vutbr.cz</a> - 
+		Databázový subsystém, PHP skripty
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://iis.pesvan.cz/index.php">http://iis.pesvan.cz/index.php</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<table>
+<tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin</td><td>fitvutbr</td><td>Administrátor</td></tr>
+<tr><td>zamestnanec</td><td>fitvutbr</td><td>Zamestnanec</td></tr>
+<tr><td>ctenar</td><td>fitvutbr</td><td>Čtenář</td></tr>
+</table>
+
+<h2>Implementace </h2>
+<p>Z predmětu IDS sme úspešne implementovali takmer každú akciu aktérov z diagramu pripadu uziti. Drzali sme sa ER diagramu, no niektore atributy sa zmenili, niektore pribudli.</p>
+<p>Co není z use-case implementováno:</p>
+<ul>
+    <li>Čas: Změnit stav rezervace</li>
+    <li>Čtenář: Vypůjčení titulu</li>
+</ul>
+<p>V naší knihovně pro jednoduchost provádí za čtenáře výpůjčku zaměstnanec knihovny.
+    Při vložení výpůjčky a při některých operacích s výtisky se také provádí simulace čtečky čárového kódu
+pro načtení ID z kartičky čtenáře a pro načtení ID výtisku z daného imaginárního exempláře. V obou případech jsou v hranatých závorkách uvedeny příklady ID. Jinde se ID nezadává.</p>
+<p>Místo změny rezervace se s časem mění stav výpůjčky. Rezervace je v systému, dokud není exemplář vypůjčen/zrušen nebo dokud není rezervace zrušena</p>
+<p>Co nebylo v use-case a je implementováno v projektu:</p>
+<ul>
+    <li>Čas: Změnit stav výpůjčky</li>
+    <li>Čtenář: Zrušení své rezervace</li>
+    <li>Čtenář: Prodloužení své výpůjčky (1x)</li>
+    <li>Zaměstnanec: Vložení výpůjčky</li>
+    <li>Zaměstnanec: Prodloužení výpůjčky (neomezeně)</li>
+    <li>Zaměstnanec: Vložení autora</li>
+    <li>Zaměstnanec: Editace autora</li>
+    <li>Zaměstnanec: Smazání autora</li>
+    <li>Zaměstnanec: Vložení výtisku</li>
+    <li>Zaměstnanec: Vyřazení výtisku</li>
+    <li>Role Administrátor</li>
+    <li>Administrátor: Vložení zaměstnance</li>
+    <li>Administrátor: Smazání zaměstnance</li>
+</ul>
+<p>Všechny role mohou vykonávat pouze své operace, jen administrátor má navíc operace zaměstnance (jedná se o zaměstnance s právy navíc).</p>
+<p>Informacny system sa spusta skriptom index.php. Skript nacitava HTML dokumenty a nejake dalsie PHP a Javascriptove subory. </p>
+<p><a target="_blank" href="http://fit.pesvan.cz/xsulak04_xsvana00.pdf">ER a use-case diagramy z předmětu IDS</a></p>
+<p>Kromě těchto náležitostí z IDS byla také (krom přihlášení a registrace) implementována základní uživatelská vybavenost ve formě změny údajů/hesla a zaslání nového hesla na email.
+    Lze také resetovat databázi do původního stavu, tato operace je dostupná všem. SQL skript s původní databází se nachází ve složce /sql/.</p>
+<p><b>PHP skripty</b></p>
+
+
+<p>Soubory v kořenovém adresáři s prefixem "_" nezobrazují žádný obsah, pouze zpracovávají požadavky z formulářů a provádějí vlastní práci s databází (INSERT, UPDATE, DELETE).
+ Na druhém řádků těchto skriptů je ke každmu krátký popisný komentář. Je zde také soubor __cron.php, který nevolá žádný ze souborů, ale spustí se automaticky jednou denně.</p>
+<p>Klíčový soubor jest index.php, který řídí zobrazování stránek a jsou do něj includovány další soubory s obsahem. Tyto soubory jsou kromě souboru index.php uloženy ve složce /pages/. Z těchto souborů jsou volány skripty z kořenového adresáře.</p>
+<p>V kořenovém adresáři se dále nachází soubor mysql.php, který má na starosti připojení do databáze. Tento soubor je includován do všech souborů které pracují s databází.</p>
+
+
+<p><b>Html dokumenty</b></p>
+<p>Nachadzaju sa iba v priecinku /pages (okrem tejto dokumentacie).</p>
+<p>Ich zoznam je nasledovny: aktuality, kontakt, o_knihovne, mapa_stranek, sluzby, doc <b>.html</b></p>
+
+<p><b>Javascript</b>
+	<ul>
+		<li>Subory sa nachadzaju v zlozke /javascript: basiccalendar.js, googleMap.js, ucet.js
+		<li><a href="http://www.dynamicdrive.com/dynamicindex7/basiccalendar.htm">Jednoduchy kalendar</a></li>
+		<li> <a href="https://maps.googleapis.com/maps/api/js?sensor=false">Google mapa </a> sidla...</li>
+		<li>... a zopar funkcii ktore menia css styl niektorych elementov, no je osetrena moznost, ze uzivatel nebude mat zapnutu podporu Javascriptu v prehliadaci - inak by sa nemohol ani registrovat.</li>
+	</ul>
+ </p>
+
+<p><b>CSS</b>
+	<ul>
+		<li> Vzhlad dokumentu definuje subor style.css </li>
+		<li> Sucastou vzhladu su aj obrazky, v priecinku /images</li> 
+		<li> Zaklad stranky inspirovany z <a href="http://www.free-css.com/free-css-templates/page29/atomohost">Free 	CSS templates - Atomohost</a>
+		</li>
+		<li>
+			Otestovane <a href="http://jigsaw.w3.org/css-validator/">CSS3 validatorom</a>
+		</li>
+	</ul>
+</p>
+
+<h2>Instalace</h2>
+<ul>
+	<li>Vsetky subory (celkom 57 + 20 obrazkov) skopirujte na server</li>
+	<li>Pomocou sql skriptu ze složky sql nahrajte polozky do databaze</li>
+	<li>Softwarové poziadavky: PHP 5, MySQL 5.0, Javascript</li>
+</ul>
+
+<h2>Známé problémy</h2>
+<p>Dizajn webu (CSS3) bol testovany pomocou <a href="http://jigsaw.w3.org/css-validator/"> w3 validatora</a>. Existuje viac druhov, no chovaju sa v niektorych pripadoch odlisne,
+    teda je moznost warningov/errorov u niektorych inych CSS3 validatorov, no vacsinou je to z dovodu, ze samotne validatory nemaju
+    implementovane niektore casti validne pre CSS3.</p><p>Tieto warningy/chyby neovplyvnuju vysledny vzhlad, system bol vyvijany v prehliadacoch
+    Opera 25.0. a Firefox 33, a testovany naviac aj v prehliadacoch Internet Explorer 11 a Google Chrome 38.0.
+</p>
+</body>
+</html>

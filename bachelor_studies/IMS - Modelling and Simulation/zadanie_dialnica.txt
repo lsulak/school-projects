@@ -1,0 +1,22 @@
+/*
+Zadanie:
+
+Zjistěte aktuální stav nájezdů, sjezdů a stavebních uzávěr na dálnici D1 v úseku Brno-Praha 
+v obou směrech. 
+
+Modelujte dálnici jako posloupnost obslužných linek s vypočtenou kapacitou.
+
+Každá obslužná linka bude modelovat 1km dálnice (sub-úsek). 
+
+Kapacitu každého sub-úseku určete (navrhněte a zdůvodněte) jako maximální počet vozidel, 
+které je možno umístit ve dvou pruzích na 1 km (případně v jednom pruhu). 
+
+Z aktuálního počtu vozidel v modelovaném sub-úseku určete (navrhněte a zdůvodněte)
+rychlost, jakou se smí vozidla na daném úseku pohybovat.
+
+Do systému budou vstupovat vozidla prostřednictvím nájezdů dle určeného
+(navrhněte a zdůvodněte) procesu příchodů. Podobně budou vozidla systém opouštět
+prostřednictvím sjezdů. 
+
+Experimentálně zjistěte propustnost dálnice v různou dobu (denní doba, den v týdnu).
+*/

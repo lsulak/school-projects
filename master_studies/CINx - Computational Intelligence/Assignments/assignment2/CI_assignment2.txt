@@ -1,0 +1,22 @@
+1. The samples (0,0), (0,1), (1,0), (-1,-1) belong to category A and the samples (2.1,0), (0,-2,5), (1.6,-1,6) belong to category B.  Draw the samples in a 2-D diagram. Are the categories linearly separable? Design a perceptron which will separate the categories.  Starting with initial  weights 0.5 and learning rate 0.1 calculate the output and the weights for 2 epochs.
+
+
+2. In a multilayer perceptron we have 2 inputs, 2 neuron in a hidden layer and one neuron in the output layer. Given inputs 0.1  and 0.9 with desired output 1. Initial weights are 0.3 from the input layer to the hidden layer and 0.2 from the hidden layer to the output. Furthermore, all bias values are 0.4 and the learning rate 0.25.  Find the new weight values after one backpropagation step. The activation function is sigmoid.
+
+
+3. Show that a neural network with many layers that have a linear activation function is equivalent to a neural network with a single layer.
+
+
+4. Describe the difference between batch and sequential updates.
+
+
+5. Explain the problem of  overfitting and how validation is used to solve it.
+
+ 
+6. For the input patterns [-0.5  0.5  1 -1] and [-0.3  0.3 0.6 -0.6] perform z-axis normalization and calculate the new patterns.
+
+
+7. In a Kohonen neural net with 1000 constant training cycles and initial learning rate 0.15, in how many cycled the learning rate will become 0.03?
+
+
+8. In a Kohonen neural net with three units in the input we present the following 4 patterns in the exact order shown [0.8 0.7 0.4], [0.6 0.9 0.9], [0.3 0.4 0.1] and [0.1 0.1 0.3]. These patterns correspond to the 2 output units with the weights [0.5 0.6 0.8] and [0.4 0.2 0.5].  Letting the radius of neighborhood to be 0 and the learning rate 0.5.  Calculate the changes in the weights  the first cycle.

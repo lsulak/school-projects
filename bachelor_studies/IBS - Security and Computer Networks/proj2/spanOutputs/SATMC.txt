@@ -1,0 +1,36 @@
+
+SUMMARY
+  UNSAFE
+
+DETAILS
+  ATTACK_FOUND
+  TYPED_MODEL
+
+PROTOCOL
+  C:\progra~1\SPAN\testsuite\results\hlpslGenFile.if
+
+GOAL
+  Secrecy attack on (Kab(8))
+
+BACKEND
+  CL-AtSe
+
+STATISTICS
+
+  Analysed   : 0 states
+  Reachable  : 0 states
+  Translation: 0.01 seconds
+  Computation: 0.00 seconds
+
+
+ATTACK TRACE
+ i -> (alice,5):  start
+ (alice,5) -> i:  alice.bob
+
+ i -> (server,3):  alice.bob
+ (server,3) -> i:  {bob.n1(Kab).n1(T).{n1(Kab).alice.n1(T)}_n1(Kbs)}_n1(Kas)
+                   & Secret(n1(Kab),set_74);
+
+ i -> (alice,5):  {bob.Kab(8).T(8).{Kab(8).alice.T(8)}_Kbs(8)}_Kas(8)
+ (alice,5) -> i:  {Kab(8).alice.T(8)}_Kbs(8)
+                  & Secret(Kab(8),set_92);

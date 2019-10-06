@@ -1,0 +1,8 @@
+
+#define MAX_BUFFER	1024
+
+#define MY_PORT_NUM	19000
+
+#define MAKEFILE_STREAM	0
+#define TS_STREAM	1
+

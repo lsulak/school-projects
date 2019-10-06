@@ -1,0 +1,8 @@
+drwxr-xr-x    2 root     system        512 Aug 07  2002 bin
+drwxr-xr-x    2 root     system        512 Aug 07  2002 dev
+drwxr-xr-x    2 root     system        512 Aug 07  2002 etc
+drwxr-xr-x    2 ftp      ftp-adm       512 Aug 07  2002 incoming
+drwx------    2 root     5             512 Jan 29  2010 lost+found
+drwxr-xr-x   18 ftp-adm  ftp-adm       512 Mar 20 05:10 pub
+drwxrwxrwt    2 root     system        512 Feb 13  2006 tmp
+drwxr-xr-x    2 root     system        512 Aug 07  2002 usr

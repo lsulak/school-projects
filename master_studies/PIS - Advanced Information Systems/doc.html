@@ -1,0 +1,218 @@
+<!DOCTYPE html  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2"/>
+    <title>Projekt PIS</title>
+    <style type="text/css">
+        table { border-collapse: collapse; }
+        td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+        dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+    <!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu
+         podle použitého editoru -->
+
+    <!-- Nahraďte prosím názvem tématu -->
+    <h1>Videopůjčovna</h1>
+
+    <!-- Jména autorů a jejich činnost -->
+    <dl>
+        <dt>Autoři</dt>
+        <dd>Matúš Turic
+            <a href="mailto:xturic01@stud.fit.vutbr.cz">xturic01@stud.fit.vutbr.cz</a> -
+            návrh, architektúra, implementácia kostry, dizajn, bezpečnosť
+        </dd>
+        <dd>Ladislav Šulák
+            <a href="mailto:xsulak04@stud.fit.vutbr.cz">xsulak04@stud.fit.vutbr.cz</a> -
+            dizajn, testovanie, formuláre, dokumentácia, generovanie PDF
+        </dd>
+        <dd>Peter Cilip
+            <a href="mailto:xcilip00@stud.fit.vutbr.cz">xcilip00@stud.fit.vutbr.cz</a> -
+            dizajn, testovanie, nákupný košík, výpožičky
+        </dd>
+    </dl>
+
+    <!-- uživatelské účty -->
+    <h2>Uživatelé systému pro testování</h2>
+    <p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+    <table>
+        <tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+        <tr><td>superadmin@gmail.com</td><td>superadmin</td><td>Super administrátor</td></tr>
+        <tr><td>admin@gmail.com</td><td>admin123</td><td>Administrátor</td></tr>
+        <tr><td>user@gmail.com</td><td>user1234</td><td>Užívateľ</td></tr>
+    </table>
+
+    <!-- vyžadované knihovny i s verzemi, pouze pro Java EE -->
+    <h2>Vyžadované knihovny</h2>
+
+    <h4>Závislosti a pluginy z <i>pom.xml</i></h4>
+    <ul>
+        <li>Spring Boot Starter Parent (1.5.1.RELEASE)</li>
+        <ul>
+            <li>spring-boot-starter-data-jpa</li>
+            <li>spring-boot-starter-mail</li>
+            <li>spring-boot-starter-security</li>
+            <li>spring-boot-starter-thymeleaf</li>
+            <li>spring-boot-starter-web</li>
+            <li>spring-boot-starter-test</li>
+        </ul>
+
+        <li>Spring Boot Devtools</li>
+        <li>Spring Cloud AWS Context (1.2.0.RELEASE)</li>
+
+        <li>H2 database engine (1.4.193)</li>
+        <li>Itext (4.2.2)</li>
+        <li>QueryDSL-jpa (4.1.4)</li>
+
+
+        <li> WebJars </li>
+        <ul>
+            <li>bootstrap (3.3.7)</li>
+            <li>jquery (2.1.4)</li>
+            <li>font-awesome (4.7.0)</li>
+        </ul>
+
+        <li>Thymeleaf</li>
+        <ul>
+            <li>thymeleaf-extras-springsecurity4 (2.1.2.RELEASE)</li>
+            <li>thymeleaf-spring-data-dialect (2.1.1)</li>
+        </ul>
+
+        <li>Plugins</li>
+        <ul>
+            <li>spring-boot-maven-plugin</li>
+            <li>apt-maven-plugin (1.1.3)</li>
+            <li>sass-maven-plugin (1.1.1)</li>
+        </ul>
+    </ul>
+
+    <h2>Vývojové a testovacie prostredie</h2>
+    <ul>
+        <li>IntelliJ IDEA 2016.3.5 ULTIMATE (študentská licencia)</li>
+        <li>Windows 10, 64-bit</li>
+        <li>Google Chrome 57.0.2987.110</li>
+        <li>Firefox 52.0.1</li>
+        <li>Internet Explorer 11</li>
+    </ul>
+
+    <h2>Výpis všetkých knižníc, modulov a závislostí z <i>Project Settings</i></h2>
+    <li>
+        <li>Java Version 1.8.0_66 (jdk1.8.0_66)</li>
+        <li>Maven: antlr:antlr:2.7.7</li>
+        <li>Maven: ch.qos.logback:logback-classic:1.1.9</li>
+        <li>Maven: ch.qos.logback:logback-core:1.1.9</li>
+        <li>Maven: com.amazonaws:aws-java-sdk-cloudinformation:1.11.98</li>
+        <li>Maven: com.amazonaws:aws-java-sdk-core:1.11.98</li>
+        <li>Maven: com.amazonaws:aws-java-sdk-ec2:1.11.98</li>
+        <li>Maven: com.amazonaws:aws-java-sdk-kms:1.11.98</li>
+        <li>Maven: com.amazonaws:aws-java-sdk-s3:1.11.98</li>
+        <li>Maven: com.amazonaws:jmespath-java:1.11.98</li>
+        <li>Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0</li>
+        <li>Maven: com.fasterxml.jackson.core:jackson-core:2.8.6</li>
+        <li>Maven: com.fasterxml.jackson.core:jackson-databind:2.8.6</li>
+        <li>Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.8.6</li>
+        <li>Maven: com.fasterxml:classmate:1.3.3</li>
+        <li>Maven: com.google.code.findbugs:jsr305:1.3.9</li>
+        <li>Maven: com.google.guava:guava:18.0</li>
+        <li>Maven: com.h2database:h2:1.4.193</li>
+        <li>Maven: com.infradna.tool:bridge-method-annotation:1.13</li>
+        <li>Maven: com.itextpdf:itextpdf:5.5.6</li>
+        <li>Maven: com.jayway.jsonpath:json-path:2.2.0</li>
+        <li>Maven: com.mysema.commons:mysema-commons-lang:0.2.4</li>
+        <li>Maven: com.querydsl:querydsl-core:4.1.4</li>
+        <li>Maven: com.querydsl:querydsl-jpa:4.1.4</li>
+        <li>Maven: com.sun.mail:javax.mail:1.5.6</li>
+        <li>Maven: com.vaadin.external.google:android-json:0.0.20131108.vaadin1</li>
+        <li>Maven: commons-codec:commons-codec:1.10</li>
+        <li>Maven: commons-logging:commons-logging:1.1.3</li>
+        <li>Maven: dom4j:dom4j:1.6.1</li>
+        <li>Maven: io.github.jpenren:thymeleaf-spring-data-dialect:2.1.1</li>
+        <li>Maven: javax.activation:activation:1.1</li>
+        <li>Maven: javax.transaction:javax.transaction-api:1.2</li>
+        <li>Maven: javax.validation:validation-api:1.1.0.Final</li>
+        <li>Maven: joda-time:joda-time:2.9.7</li>
+        <li>Maven: junit:junit:4.12</li>
+        <li>Maven: net.minidev:accessors-smart:1.1</li>
+        <li>Maven: net.minidev:json-smart:2.2.1</li>
+        <li>Maven: nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.4.0</li>
+        <li>Maven: ognl:ognl:3.0.8</li>
+        <li>Maven: org.apache.httpcomponents:httpclient:4.5.2</li>
+        <li>Maven: org.apache.httpcomponents:httpcore:4.4.6</li>
+        <li>Maven: org.apache.tomcat.embed:tomcat-embed-core:8.5.11</li>
+        <li>Maven: org.apache.tomcat.embed:tomcat-embed-el:8.5.11</li>
+        <li>Maven: org.apache.tomcat.embed:tomcat-embed-websocket:8.5.11</li>
+        <li>Maven: org.apache.tomcat:tomcat-jdbc:8.5.11</li>
+        <li>Maven: org.apache.tomcat:tomcat-juli:8.5.11</li>
+        <li>Maven: org.aspectj:aspectjweaver:1.8.9</li>
+        <li>Maven: org.assertj:assertj-core:2.6.0</li>
+        <li>Maven: org.codehaus.groovy:groovy:2.4.7</li>
+        <li>Maven: org.eclipse.jdt.core.compiler:ecj:4.5.1</li>
+        <li>Maven: org.hamcrest:hamcrest-core:1.3</li>
+        <li>Maven: org.hamcrest:hamcrest-library:1.3</li>
+        <li>Maven: org.hibernate.common:hibernate-commons-annotations:5.0.1.Final</li>
+        <li>Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final</li>
+        <li>Maven: org.hibernate:hibernate-core:5.0.11.Final</li>
+        <li>Maven: org.hibernate:hibernate-entitymanager:5.0.11.Final</li>
+        <li>Maven: org.hibernate:hibernate-validator:5.3.4.Final</li>
+        <li>Maven: org.javassist:javassist:3.21.0-GA</li>
+        <li>Maven: org.jboss.logging:jboss-logging:3.3.0.Final</li>
+        <li>Maven: org.jboss:jandex:2.0.0.Final</li>
+        <li>Maven: org.mockito:mockito-core:1.10.19</li>
+        <li>Maven: org.objenesis:objenesis:2.1</li>
+        <li>Maven: org.ow2.asm:asm:5.0.3</li>
+        <li>Maven: org.skyscreamer:jsonassert:1.4.0</li>
+        <li>Maven: org.slf4j:jcl-over-slf4j:1.7.22</li>
+        <li>Maven: org.slf4j:jul-to-slf4j:1.7.22</li>
+        <li>Maven: org.slf4j:log4j-over-slf4j:1.7.22</li>
+        <li>Maven: org.slf4j:slf4j-api:1.7.22</li>
+        <li>Maven: org.springframework.boot:spring-boot:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-autoconfigure:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-devtools:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-starter:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-starter-aop:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-starter-data-jpa:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-starter-jdbc:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-starter-logging:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-starter-mail:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-starter-security:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-starter-test:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-starter-thymeleaf:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-starter-tomcat:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-starter-web:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-test-autoconfigure:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.boot:spring-boot-test:1.5.1.RELEASE</li>
+        <li>Maven: org.springframework.cloud:spring-cloud-aws-context:1.2.0.RELEASE</li>
+        <li>Maven: org.springframework.cloud:spring-cloud-aws-core:1.2.0.RELEASE</li>
+        <li>Maven: org.springframework.data:spring-data-commons:1.13.0.RELEASE</li>
+        <li>Maven: org.springframework.data:spring-data-jpa:1.11.0.RELEASE</li>
+        <li>Maven: org.springframework.security:spring-security-config:4.2.1.RELEASE</li>
+        <li>Maven: org.springframework.security:spring-security-core:4.2.1.RELEASE</li>
+        <li>Maven: org.springframework.security:spring-security-web:4.2.1.RELEASE</li>
+        <li>Maven: org.springframework:spring-aop:4.3.6.RELEASE</li>
+        <li>Maven: org.springframework:spring-aspects:4.3.6.RELEASE</li>
+        <li>Maven: org.springframework:spring-beans:4.3.6.RELEASE</li>
+        <li>Maven: org.springframework:spring-context-support:4.3.6.RELEASE</li>
+        <li>Maven: org.springframework:spring-context:4.3.6.RELEASE</li>
+        <li>Maven: org.springframework:spring-core:4.3.6.RELEASE</li>
+        <li>Maven: org.springframework:spring-expression:4.3.6.RELEASE</li>
+        <li>Maven: org.springframework:spring-jdbc:4.3.6.RELEASE</li>
+        <li>Maven: org.springframework:spring-orm:4.3.6.RELEASE</li>
+        <li>Maven: org.springframework:spring-test:4.3.6.RELEASE</li>
+        <li>Maven: org.springframework:spring-tx:4.3.6.RELEASE</li>
+        <li>Maven: org.springframework:spring-web:4.3.6.RELEASE</li>
+        <li>Maven: org.springframework:spring-webmvc:4.3.6.RELEASE</li>
+        <li>Maven: org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE</li>
+        <li>Maven: org.thymeleaf:thymeleaf-spring4:2.1.5.RELEASE</li>
+        <li>Maven: org.thymeleaf:thymeleaf:2.1.5.RELEASE</li>
+        <li>Maven: org.unbescape:unbescape:1.1.0.RELEASE</li>
+        <li>Maven: org.webjars:bootstrap:3.3.7</li>
+        <li>Maven: org.webjars:font-awesome:4.7.0</li>
+        <li>Maven: org.webjars:jquery:2.1.4</li>
+        <li>Maven: org.yaml:snakeyaml:1.17</li>
+        <li>Maven: software.amazon.ion:ion-java:1.0.2</li>
+    </ul>
+</body>
+</html>

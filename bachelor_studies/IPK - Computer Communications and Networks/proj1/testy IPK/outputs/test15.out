@@ -1,0 +1,9 @@
+-r-xr-xr-x    1 root     system     123604 Aug 07  2002 bzcat
+-r-xr-xr-x    1 root     system     123604 Aug 07  2002 bzip2
+-r-xr-xr-x    3 root     system     110368 Aug 06  2002 gunzip
+-r-xr-xr-x    3 root     system     110368 Aug 06  2002 gzcat
+-r-xr-xr-x    3 root     system     110368 Aug 06  2002 gzip
+-r-xr-xr-x    1 root     system     297164 Aug 06  2002 ls
+-r-xr-xr-x    1 root     system      60880 Aug 06  2002 pwd
+-r-xr-xr-x    1 root     system     175768 Aug 06  2002 rm
+-r-xr-xr-x    1 root     system     305024 Aug 06  2002 tar

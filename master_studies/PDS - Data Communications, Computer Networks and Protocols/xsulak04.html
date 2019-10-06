@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Project TcpStats</title>
+	
+		<!-- CSS -->
+		<link rel="stylesheet" href="css/bootstrap.min.css" id="bootstrap-style"  >
+		<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+		<link rel="stylesheet" href="css/style.css"  id="base-style" >
+		<link rel="stylesheet" href="css/style-responsive.css" id="base-style-responsive">
+
+		<!-- JavaScript-->
+		<script src="js/jquery-2.2.3.min.js"></script>
+		<script src="js/highcharts.js"></script> 
+		<script src="js/exporting.js"></script>
+
+		<script src="js/myGraphs.js"></script>
+
+		<script src="js/jquery-migrate-1.0.0.min.js"></script>
+		<script src="js/jquery-ui-1.10.0.custom.min.js"></script>
+		<script src="js/jquery.ui.touch-punch.js"></script>
+		<script src="js/modernizr.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.cookie.js"></script>
+		<script src='js/jquery.dataTables.min.js'></script>
+		<script src="js/jquery.chosen.min.js"></script>
+		<script src="js/jquery.uniform.min.js"></script>
+		<script src="js/jquery.cleditor.min.js"></script>
+		<script src="js/jquery.noty.js"></script>
+		<script src="js/jquery.elfinder.min.js"></script>
+		<script src="js/jquery.raty.min.js"></script>
+		<script src="js/jquery.iphone.toggle.js"></script>
+		<script src="js/jquery.uploadify-3.1.min.js"></script>
+		<script src="js/jquery.gritter.min.js"></script>
+		<script src="js/jquery.imagesloaded.js"></script>
+		<script src="js/jquery.masonry.min.js"></script>
+		<script src="js/jquery.knob.modified.js"></script>
+		<script src="js/jquery.sparkline.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+
+	<body>
+
+	
+	
+		<div class="container-fluid-full" id="#top">
+			<div class="row-fluid">
+				
+				<!-- Main Menu -->
+				<div id="sidebar-left" class="span2" >
+					<div class="nav-collapse sidebar-nav">
+						<ul class="nav nav-tabs nav-stacked main-menu">
+							<li><a href="#doc"><i class="icon-list-alt"></i><span class="hidden-tablet">Documentation</span></a></li>	
+							<li><a href="#windowSize"><i class="icon-list-alt"></i><span class="hidden-tablet">TCP Window Sizes</span></a></li>
+							<li><a href="#rtt"><i class="icon-list-alt"></i><span class="hidden-tablet">Round Trip Time</span></a></li>
+							<li><a href="#throughput"><i class="icon-list-alt"></i><span class="hidden-tablet">Throughput in Time</span></a></li>
+							<li><a href="#seqNum"><i class="icon-list-alt"></i><span class="hidden-tablet">Sequence Number</span></a></li>
+							
+						</ul>
+					</div>
+				</div>
+				
+				
+				<!-- Content -->
+				<div id="content" class="span10">
+					<ul class="breadcrumb">
+						<li>
+							<i class="icon-home"></i>
+							<a href="xsulak04.html">Project for subject PDS - Data Communications, Computer Networks and Protocols, variant TCPstats</a> 
+						</li>
+					</ul>
+
+					<div class="box" id="doc">
+						<div class="box-header">
+							<h2><i class="halflings-icon list-alt"></i><span class="break"></span>Documentation</h2>
+							<div class="box-icon">
+								<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+								<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+							</div>
+						</div>
+						<div class="box-content">
+							<dl>
+								<dt>About the author</dt>
+								<dd>Author&emsp;Ladislav Šulák (FIT VUT, 1MIT)</dd>
+								<dd>Login &emsp; xsulak04</dd>
+								<dd>Contact <a href="mailto:xsulak04@stud.fit.vutbr.cz">xsulak04@stud.fit.vutbr.cz</a></dd>
+								<dd>Date &ensp;&ensp;&ensp;4/2016</dd>
+								<br>
+
+								<dt>Description</dt>
+								<dd>Project for subject PDS - Data Communications, Computer Networks and Protocols, variant TCPstats. The project is focused on analyzis of TCP communication. The input of this project is a file containing captured network traffic, for example in format 'pcap'. For the sake of simplicity there is always only 1 TCP stream, as from the specification. The aim of this project is to provide a visual interpretation of following information, all of them are taken during the whole connection, for both endpoints:
+									<ul>
+										<li>TCP window size</li>
+										<li>Throughput</li>
+										<li>Round-trip time</li>
+										<li>Analysis of sequential numbers</li>
+									</ul> 
+								</dd>
+
+								<dt>How it works</dt>
+								<dd>The solution operates in these steps: 
+									<ul>
+										<li>firstly, there is a script written in Python. It requires 1 argument, which is the name of the input pcap-like file. As a result, it outputs a log file in Json format, so the result statistical data are saved in Json representation. For parsing the input pcap file I used a <a href="http://www.secdev.org/projects/scapy/">Scapy</a> library, </li>
+										<li>secondly, a data from such Json file are displayed in charts on HTML page. It uses Javascript and CSS languages for this purpose. To be more specific, it operates with <a href="https://jquery.com/">JQuery</a>, <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="http://www.highcharts.com/">Highcharts</a> libraries. <a href="https://github.com/jiji262/Bootstrap_Metro_Dashboard">Metro Dashboard</a> free CSS template has been used for a design part.</li>
+									</ul> 
+								</dd>
+
+								<dt>Hierarchy of files</dt>
+								<ul>
+									<li>tcpstats.py - the main script in Python for TCP data extraction. It produces Json file for saving all statistical information,</li>
+									<li>xsulak04.html - this web page. Representation of results in graphs,</li>
+									<li>css/ - folder containing all CSS files including <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="https://jquery.com/">JQuery</a>. Design is basically one of <a href="http://w3lessons.info/2014/05/16/free-responsive-bootstrap-admin-templates-2014/">free CSS templates</a>, to be more specific it is a Metro Dashboard, available on <a href="https://github.com/jiji262/Bootstrap_Metro_Dashboard">GitHub</a>. There has been implemented just a few features and modifications in it,</li>
+									<li>font/ - folder containing all fonts and few icons in HTML page, all obtained from <a href="https://github.com/jiji262/Bootstrap_Metro_Dashboard">Metro Dashboard template</a>,</li>
+									<li>img/ - folder containing all images in HTML page,</li>
+									<li>js/  - contains all Javascript files, including <a href="https://jquery.com/">JQuery</a> and <a href="http://www.highcharts.com/">Highcharts</a> libraries. File <b>myGraphs.js</b> processes Json file and creates all graphs. Actually, it is the only Javascript file, which has been implemented by the author of this work,</li>
+									<li>log/ - contains a file <b>tcpLog.json</b> for storing all necessary values for graphs.</li> <!-- and 'genInfoLog.json' -->
+								</ul>
+
+								<dt>Requirements</dt>
+								<ul>
+									<li>Python 2.7</li>
+									<li><a href="http://www.secdev.org/projects/scapy/">Scapy</a> library</li>
+									<li>JavaScript</li>
+								</ul>
+
+								<dt>Tips</dt>
+								<ul>
+									<li>You can perform a zoom in of graphs, you just have to click&amp;drag on the graph area you want to zoom. The opposite, unzoom, can be done afterwards by clicking on button 'Reset zoom'.</li>
+									<li>There are three icons on the top right corner on each category of graphs. The left one is for moving your page upper, on the top level. The middle one is for minimalizing the category and the last icon is for closing the current category. If you reload the page, this will be returned to the default settings.</li>
+									<li>Under these icons you can see another one. It is for printing or exporting of current graph to PNG, JPEG, PDF or SVG.</li>
+								</ul> 
+							</dl>
+						</div>
+					</div>
+
+					<div class="box" id="windowSize">
+						<div class="box-header">
+							<h2><i class="halflings-icon list-alt"></i><span class="break"></span>Window Size</h2>
+							<div class="box-icon">
+								<a href="#top" ><i class="up"></i></a>
+								<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+								<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+							</div>
+						</div>
+						<div class="box-content">
+							<div id="containerSendWnd" class="center" style="height:300px; margin-bottom:40px" ></div>
+							<div id="containerRecWnd"  class="center" style="height:300px;" ></div>
+						</div>
+					</div>
+
+
+					<div class="box" id="throughput">
+						<div class="box-header">
+							<h2><i class="halflings-icon list-alt"></i><span class="break"></span>Throughput of Connection</h2>
+							<div class="box-icon">
+								<a href="#top" ><i class="up"></i></a>
+								<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+								<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+							</div>
+						</div>
+						<div class="box-content">
+							<div id="containerSendBnd"  class="center" style="height:300px; margin-bottom:40px" ></div>
+							<div id="containerRecBnd"  class="center" style="height:300px;" ></div>
+						</div>
+					</div>
+
+					<div class="box" id="rtt">
+						<div class="box-header">
+							<h2><i class="halflings-icon list-alt"></i><span class="break"></span>Round Trip Time</h2>
+							<div class="box-icon">
+								<a href="#top" ><i class="up"></i></a>
+								<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+								<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+							</div>
+						</div>
+						<div class="box-content">
+							<div id="containerSendRTT"  class="center" style="height:300px; margin-bottom:40px" ></div>
+							<div id="containerRecRTT"  class="center" style="height:300px;" ></div>
+						</div>
+					</div>
+
+
+					<div class="box" id="seqNum">
+						<div class="box-header">
+							<h2><i class="halflings-icon list-alt"></i><span class="break"></span>Relative Sequence Numbers</h2>
+							<div class="box-icon">
+								<a href="#top" ><i class="up"></i></a>
+								<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+								<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+							</div>
+						</div>
+						<div class="box-content">
+							<div id="containerSendSeq"  class="center" style="height:300px; margin-bottom:40px" ></div>
+							<div id="containerRecSeq"  class="center" style="height:300px;" ></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+		<!-- Footer -->
+		<footer>
+			<p>
+				<span style="text-align:left;float:left">
+					Ladislav Šulák <br>
+					<a href="mailto:xsulak04@stud.fit.vutbr.cz" id="footerEmail">xsulak04@stud.fit.vutbr.cz</a>  <br>
+				</span>
+				<span style="text-align:right;float:right">
+					4/2016 <br>
+					FIT VUT Brno <br>
+				</span>
+			</p>
+		</footer>
+	</body>
+</html>

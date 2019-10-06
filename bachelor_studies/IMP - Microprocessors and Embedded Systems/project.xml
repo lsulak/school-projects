@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project outputprefix="otackomer">
+
+    <!--  Project description -->
+    <name>Otáčkomer</name>
+    <author>Ladislav Šulák</author>
+    <authoremail>xsulak04@stud.fit.vutbr.cz</authoremail>
+    <revision>20141217</revision>
+    <description>Aplikácia ktorá meria otáčky a vykresluje ich frekvenciu na vystup VGA.</description>
+
+    <!--  MCU part -->
+    <mcu>
+        <include>mcu/libs/keyboard/package.xml</include>
+        <include>mcu/libs/lcd/package.xml</include>
+        <file>main.c</file>
+    </mcu>
+
+    <!-- FPGA part -->
+    <fpga architecture="pc">
+        <include>fpga/ctrls/spi/package.xml</include>
+        <include>fpga/ctrls/vga/package.xml</include>
+        <include>fpga/ctrls/lcd/package.xml</include>
+        <include>fpga/ctrls/keyboard/package.xml</include>
+        
+        <file>top_level.vhd</file>
+    </fpga>
+
+</project>

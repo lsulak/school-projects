@@ -1,0 +1,272 @@
+@charset "UTF-8";
+
+body
+{   
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 11pt;
+  margin: 0 auto;	
+  background-color: #222222;
+}
+
+#itw_p1_2014 
+{
+	min-width: 620px;
+    max-width: 1000px;
+}
+
+#page 
+{
+    background: url(images/bg.jpg) no-repeat;
+    background-position: center top 200px;
+    background-attachment: fixed;
+    background-color:  #E6E3DD;
+}
+
+#hidden
+{
+	position: hidden;
+}
+
+div #menu
+{
+	margin-left: 30px;
+	margin-top: 129px;
+	width: 160px;
+	background: #555555;
+	color: white;
+	font-size: 14.14pt;
+	position: absolute;
+	z-index: 1;
+}
+
+div #menu ul li a.anchor
+{
+	color:inherit;
+  	text-decoration: none;
+}
+
+ul.main 
+{
+	margin: 0;
+	padding: 0;
+	padding-left: 7%;
+	list-style: none;
+}
+
+div #menu hr 
+{
+	margin-left: 7%;
+	margin-right: 7%;
+}
+
+div #menu ul.main li
+{
+	padding-top: 5%;
+}
+
+div.bottom 
+{
+	padding-left: 7%;
+}
+
+div #menu div.bottom p a 
+{
+	color:inherit;
+	font-size: 11pt;
+  	text-decoration: none;
+}
+div #menu ul li:hover
+{	padding: 0;
+	margin: 0;
+	border: 0;
+	padding-left: 10px;
+	padding-top: 5%;
+	margin-left: -10px;
+	color: black;
+	
+	padding-bottom: 7%;
+	margin-bottom: -7%;
+
+	background-image: url(images/menu_sel.png), url(images/menu_sh.png);
+	background-position: 0px, -7px 25px;
+	background-repeat: no-repeat;
+}
+
+#hh1 a  
+{
+    position: absolute;
+	height:165px;
+    width: 165px;	
+}
+
+#hh1 
+{ 
+	background-image: url(images/logo.png);
+	background-repeat: no-repeat;
+
+	margin-left: 30px;
+	margin-top: -1px;
+	margin-bottom: -128px;
+    height:165px;
+    width: 165px;	
+}
+
+p.hidden 
+{
+	display: none;
+}
+
+#hh1 span
+{
+	display: none;
+}
+
+h2 
+{	
+	text-transform: uppercase;
+	color: white;
+	font-size: 13pt;
+	float: right;	
+	
+	background: url(images/h2sh.png) no-repeat;
+	background-position: 48px;
+	padding-left: 52px;
+	padding-bottom: 27px;	
+}
+
+h2 span
+{
+	background: url(images/h2bg.png);
+	background-repeat: no-repeat;
+	background-position: left;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-right: 100px;
+	padding-left: 50px;
+}
+
+div #mainimg
+{
+	margin-top: 52px;
+	margin-bottom: 50px;
+	float: right;
+}
+
+div #content
+{
+	min-width: 620px;
+	max-width: 800px; 
+	padding-top: 12px;
+	padding-bottom: 17px;
+	margin-left:auto;
+	margin-right: auto;
+}
+
+div #top
+{	
+	margin-top: 380px;
+	background: white;
+	padding-bottom: 70px;
+}
+
+div #top p 
+{
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+div #history
+{
+	padding-left: 30px;
+	padding-right: 30px;
+
+	padding-top: 40px;
+	background: #DDDDDD;
+	padding-bottom: 70px;
+
+	background-image: url(images/c_wt.png);
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+div #cover
+{
+	padding-left: 30px;
+	padding-right: 30px;
+	
+	padding-top: 40px;
+	background:  #F0F0F0;
+	padding-bottom: 70px;
+
+	background-image: url(images/c_dt.png);
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+div #interpretation
+{
+	padding-left: 30px;
+	padding-right: 30px;
+
+	padding-top: 40px;
+	background: #DDDDDD;
+	padding-bottom: 70px;
+
+	background-image: url(images/c_lt.png);
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+div.imgrow
+{
+	text-align: center;
+}
+
+div.imgrow a 
+{
+	position: relative;
+	background-image: url(images/imagesh.png);
+	padding-top: 2px;
+	padding-bottom: 3px;
+	padding-right: 12px;
+	background-position: 95%;
+}
+
+div #personnel
+{
+	padding-left: 30px;
+	padding-right: 30px;
+
+	padding-top: 40px;
+	background: #EEEEEE;
+	padding-bottom: 70px;
+
+	background-image: url(images/c_dt.png);
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+div #personnel ul 
+{
+	padding-left: 20px;
+	list-style: none;
+}
+
+div #personnel ul li
+{
+	padding-top: 3%;
+}
+
+img.sideimg
+{
+	padding-left: 20px;
+	float: right;
+}
+
+div #personnel a img.sideimg
+{
+	background-image: url(images/mapa_sh.png);
+	background-repeat: no-repeat;
+	padding-bottom: 100px;
+	background-position: 10px 212px;
+}

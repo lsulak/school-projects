@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project>
+   <description>IJA: Ant file for Homework3</description>
+	
+	<!-- Delete existing build, jar directories-->
+	<target name="clean">
+        <delete dir="build"/>
+        <delete dir="dest-server"/>
+		<delete dir="dest-client"/>
+	</target>
+	
+	<!-- Clean, create documentation, compile and create jar -->
+	<target name="compile" depends="clean" description="Compile">
+		<!--<exec executable="/bin/bash"  >
+			<arg value="./lib/get-libs.sh" />
+		</exec> -->
+    
+        <mkdir dir="build"/>
+        <mkdir dir="dest-server"/>
+		<mkdir dir="dest-client"/>
+        <javac srcdir="src" destdir="build" includeantruntime="false" classpath="lib/junit-4.10.jar"/>
+		
+		<jar destfile="dest-server/ija2014-server.jar" basedir="build">
+            <manifest>
+                <attribute name="Main-Class" value="ija.ServerListen"/>
+            </manifest>
+		</jar>
+
+		<javac srcdir="src" destdir="build" includeantruntime="false" classpath="lib/junit-4.10.jar"/>
+				
+				<jar destfile="dest-client/ija2014-client.jar" basedir="build">
+		            <manifest>
+		                <attribute name="Main-Class" value="ija.Client"/>
+		            </manifest>
+				</jar>
+		
+		<javadoc packagenames="src" sourcepath="src" destdir="doc" classpath="lib/junit-4.10.jar">
+	       <fileset dir="src">
+                <include name="**" />
+           </fileset>
+	    </javadoc>
+	</target>
+	
+	<!-- Test aplication -->
+	<target name="test">
+		<junit printsummary="withOutAndErr" fork="true" >
+			<test name="ija.Tests" />
+			 <classpath>
+			 	<!--  <pathelement location="src.ija.Tests"/> -->
+			      <pathelement path="build"/>
+			      <pathelement location="lib/junit-4.10.jar"/>
+			 </classpath>
+		</junit>
+	</target>
+		
+	<!-- Run jar file -->
+	<target name="run">
+       <parallel>
+            <sequential>
+                <java fork="true" jar="dest-server/ija2014-server.jar"/>
+            </sequential>
+            <sequential>
+                <java fork="true" jar="dest-client/ija2014-client.jar"/>
+            </sequential>
+            <sequential>
+                <java fork="true" jar="dest-client/ija2014-client.jar"/>
+            </sequential>
+        </parallel>
+	</target>
+		
+</project>

@@ -1,0 +1,75 @@
+FLP - Funkcionalny projekt, varianta Rubikova kocka
+
+Autor: Ladislav Šulák
+Login: xsulak04, 1MIT
+Kontakt: xsulak04@stud.fit.vutbr.cz
+Datum: 26.4.2016
+
+---> Premiove body? Mozno za netradicny testovaci scenar (pripadne za ciastocne algoritmicku implementaciu??).
+
+Popis: 
+  Projekt z funkcionalneho programovania do predmetu FLP - riesenie Rubikovej kocky.
+
+  Program je napisany v jazyku Prolog a sluzi pre vyriesenie Rubikovej kocky pomocou prehladavania stavoveho priestoru.
+  Vstup prijima standardneho vstupu v predpisanom formate a vysledok zapise na standardny vystup ako sekvenciu kociek,
+  pricom prva je vstupna, a posledna vyriesena.
+
+
+Zoznam suborov:
+  rubikCube.pl  - zdrojovy subor, obsahuje funkciu main a vsetky klauzuly a zalezitosti potrebne pre riesenie
+  Makefile      - subor pre preklad
+  README        - subor s popisom projektu
+
+  alg/rubikCubeAlg.pl - prosim nehodnotit -> je to zdrojovy subor, ktory implementuje 
+    algoritmicke riesenie problemu - iba ciastocne - najde iba kriz, teda nie pomocou prehladavania stavoveho priestoru.
+
+  zlozka tests:
+  input[1-5].txt - vstupne subory, obsahujuce kocky zlozitelne na par tahov. Riesenie trva do 3 sekund.
+  test.py       - testovaci skript v jazyku Python. Testovanie bude popisane nizsie.
+
+
+Preklad:
+  pomocou Makefile, prikaz make prelozi program nasledovne:
+  swipl -q -g main -o flp16-log -c rubikCube.pl 
+
+
+Spustenie:
+  $ ./flp16-log -> nie je vyzadovany ziadny parameter, vstup sa zadava pomocou standardneho vstupu.
+
+
+Testovanie:
+  ./test.py   -> nie je vyzadovany ziadny parameter.
+  Premenna tInput obsahuje retazec - vstupnu Rubikovu kocku, ktora sa preda programu v Prologu, a zacne sa riesit.
+  Tato reprezentacia kocky je ziskana z aplikacie http://thecube.guru/online-3d-rubiks-cube/ nasledovne:
+  V sekcii 'Online 3D Rubik’s Cube' je nutne zadat Scramble -> Export, a skopirovat do tejto premennej vysledne hodnoty
+  z dialogoveho okna. Skript nasledne konvertuje tuto reprezentaciu kocky na nasu a zavola program v Prologu s tymto vstupom.
+
+  Pre testovacie ucely je nutne odkomentovat v rubikCube.pl riadok 394: %,writeln(MoveSeq), ktory vypise list
+  obsahujuci sekvenciu krokov, ktore vedu k rieseniu. Tuto sekvenciu je mozne zadat do aplikacie 'Online 3D Rubik’s Cube'
+  v policku 'Enter move codes here:' a potvrdit - Send codes. Tymto padom sme ziskali vizualizaciu riesenia tohto projektu.
+
+
+Vstup:
+  Cisla 1-6 reprezentuju jednotlive farby. Format kocky je specifikovany v zadani a je nasledovny:
+    555
+    555   -> Horna podstava
+    555
+    111 222 333 444
+    111 222 333 444   -> Stred, postupne smerom zlava doprava: Predna, Prava, Zadna a Lava stena
+    111 222 333 444
+    666
+    666   -> Spodna podstava
+    666
+
+
+Vystup:
+  Vo formate specifikovanom v zadani je na standardny vystup vypisana sekvencia kociek, ktora
+  vedie k rieseniu, v pripade, ze sa riesenie v stavovom priestore najde (pri nedostatocnom zanoreni sa nemusi najst).
+
+
+Zaver:
+  Program implementuje generovanie a prehladavanie stavoveho priestoru moznych rieseni pohybov kocky.
+  Takmer na konci zdrojoveho suboru je v procedure 'solveCube' prvy argument urcujuci maximalnu hlbku prehladavania.
+  Pokial je nedostatocny, tak sa riesenie nepodari najst. Inymi slovami, kocka sa neda zlozit na dany pocet tahov (hlbka zanorenia. Najprv bola snaha o implementovanie riesenia nie prostrednictvom prehladavania stavoveho priestoru, ale algoritmicky, no od tohto riesenia bolo upustene, najma kvoli (casovej a implementacnej) narocnosti takehoto pristupu.
+  Uspesne sa podarilo implementovat riesenie kriza (co je prvy krok v takomto algoritme), k comu prikladam zdrojovy subor
+  'alg/rubikCubeAlg.pl' - avsak vysledny projekt je v zdrojovom subore 'rubikCube.pl'.

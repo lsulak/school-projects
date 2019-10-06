@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Real-time Tic Tac Toe with Super Chat!</title>
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Indie+Flower" />
+        <style>
+            body {
+                background-image: url("bg.jpg");
+            }
+            h1 {
+                text-align: center;
+                color: #005;
+                font: 100 35px "Indie Flower", Helvetica, sans-serif;
+                text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 3px 3px 0px rgba(0,0,0,0.05);
+            }
+            .left-game-zone {
+                transform-style: preserver-3d;
+                position: absolute;
+                margin-top: -1%;
+            }
+            .canvas-wrapper {
+                width: 100%;
+            }
+            #tic-tac-toe-board {
+                display: block;
+                margin-left: 10%;
+                margin-bottom: 2%;
+            }
+            #resetGameButton {
+                margin-left: 45%;
+                margin-top: 2%;
+                padding-left: 10%;
+                padding-right: 10%;
+                padding-top: 1%;
+                padding-bottom: 1%;
+            }
+            #playerToMove {
+                margin-left: 10%;
+                position: left;
+                color: red;
+                font: 100 19px "Indie Flower", Helvetica, sans-serif;
+                text-shadow: 1px 1px 0px rgba(0,0,0,0.1), 1px 1px 0px rgba(0,0,0,0.05);
+            }
+
+            @media (min-width:1151px) {
+                .right-chat-zone {
+                    color: #005;
+                    font: 100 19px "Indie Flower", Helvetica, sans-serif;
+                    text-shadow: 1px 1px 0px rgba(0,0,0,0.1), 1px 1px 0px rgba(0,0,0,0.05);
+                    border-style: groove;
+                    display: block;
+                    margin-left: 50%;
+                    margin-right: 15%;
+                    width: 35%;
+                }
+                .right-video-zone {
+                    margin-top: -2%;
+                    margin-left: 50%;
+                    padding: 0;
+                }
+                #chatZone strong {
+                    color: white;
+                    background-color: black;
+                    padding: 1.5px;
+                }
+                #chat_form #message {
+                    margin-left: 2%;
+                    width: 68%;
+                }
+                .myBox {
+                    width: 500px;
+                    height: 280px;
+                    overflow: auto;
+                }
+                #sendButton {
+                    width: 11%;
+                    margin-left: 0%;
+                }
+                #callButton {
+                    width: 5%;
+                    margin-top: 4px;
+                    position: absolute;
+                    margin-left: 29%;
+                }
+            }
+
+            @media (max-width:1150px) {
+                .right-chat-zone {
+                    color: #005;
+                    font: 100 19px "Indie Flower", Helvetica, sans-serif;
+                    text-shadow: 1px 1px 0px rgba(0,0,0,0.1), 1px 1px 0px rgba(0,0,0,0.05);
+                    border-style: groove;
+                    display: block;
+                    margin-top: 15%;
+                    margin-left: 15%;
+                    margin-right: 15%;
+                    width: 70%;
+                }
+                #sendButton {
+                    width: 11%;
+                }
+                #callButton {
+                    width: 10%;
+                    margin-top: 5px;
+                    position: absolute;
+                    margin-left: 58%;
+                }
+                #chat_form #message {
+                    width: 70%;
+                }
+                .myBox {
+                    width: 500px;
+                    height: 280px;
+                    overflow: auto;
+                }
+                .right-video-zone {
+                    margin-top: 3%;
+                    margin-left: 60%;
+                    padding: 0;
+                }
+            }
+        </style>
+    </head>
+ 
+    <body>
+        <h1>Real-time Tic Tac Toe with Super Chat!</h1>
+        <div class="left-game-zone">
+            <div class="canvas-wrapper">
+                <canvas id="tic-tac-toe-board" class="center-v"></canvas>
+                <span id="playerToMove">Waiting for players...</span>
+                <button type="submit" id="resetGameButton">Reset Game</button>
+            </div>
+        </div>
+
+         <div class="right-video-zone">
+            <video id="localVideo" width="260" height="250" autoplay> </video>
+            <video id="remoteVideo" width="260" height="250" autoplay> </video> 
+        </div>
+
+        <div class="right-chat-zone">
+            <input type="submit" id="callButton" value="Call" />
+             <form action="/" method="post" id="chat_form">
+                <input type="text" name="message" id="message" placeholder="Your message..." size="45" autofocus />
+                <input type="submit" id="sendButton" value="Send" />
+            </form>
+
+            <div class="myBox">
+                <section id="chatZone"></section>
+            </div>
+        </div>
+
+        <script src="jquery-1.10.1.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+        
+            /* ################## CHAT CODE ################## */
+            // Connecting to socket.io
+            var socket = io.connect("https://192.168.1.2:443");  // 212.251.17.119
+
+            // The username is requested, sent to the server and displayed in the title.
+            var user_name = "";
+            var user_id = 0;
+            var opponent_name = "";
+
+            while(true) {  // username has to be in correct format
+                user_name = prompt("What\'s your username? (at least 3 characters)");
+                if (user_name && user_name.length >= 3)
+                    break;
+            }
+            socket.emit("new_client", user_name);
+            document.title = "[" + user_name + "] " + document.title;
+
+            // When a message is received it's inserted in the page.
+            socket.on("message", function (data) {
+                insertMessage(data.username, data.message)
+            })
+
+            // When a new client connects, the information is displayed.
+            // Also, if there is no opponent, it means that only 1 user is connected.
+            // If another one will connect, it means that this will be the opponent.
+            // His name will be saved.
+            socket.on("new_client", function (username) {
+                $("#chatZone").prepend("<p><em>" + username + " has joined the chat!</em></p>");
+                if (opponent_name === "")
+                    opponent_name = username;
+            })
+
+            // When a new client connects, the information is displayed in common chat board.
+            socket.on("client_left", function (username) {
+                $("#chatZone").prepend("<p><em>" + username + " has left!</em></p>");
+            })
+
+            // When the form is submitted, the message is sent and displayed on the page.
+            $("#chat_form").submit(function () {
+                var message = $("#message").val();
+                if (message.length > 0) {
+                    socket.emit("message", message); // Sends the message to the others
+                    insertMessage(user_name, message); // Also displays the message on our page
+                }
+                $("#message").val('').focus(); // Empties the chat form and puts the focus back on it
+                return false; // Blocks 'classic' sending of the form
+            });
+
+            // Adds a message to the common chat board.
+            function insertMessage (username, message) {
+                $("#chatZone").prepend("<p><strong>" + username + "</strong> " + message + "</p>");
+            }
+
+            /* ################## VIDEO CODE ################## */
+            var localStream;
+
+            var localVideo = document.getElementById("localVideo");  
+            var remoteVideo = document.getElementById("remoteVideo");
+
+            var callButton = document.getElementById("callButton");
+
+            // we are waiting for loading streams - if they are not available, we
+            // cannot call anyway.
+            callButton.disabled = true;
+            callButton.onclick = call;
+
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
+            navigator.getUserMedia({audio:true, video:true}, gotStream, // both audio and video
+                function (error) { console.log(error); });
+                
+            var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+            var SessionDescription = window.RTCSessionDescription || window.mozRTCSessionDescription || window.webkitRTCSessionDescription;
+            var pc = new RTCPeerConnection({"iceServers": []});
+
+            function gotStream (stream) {   
+                localVideo.src = window.URL.createObjectURL(stream);
+                localStream = stream;
+                callButton.disabled = false;  // we got stream, we can call now
+                pc.addStream(stream);
+            }
+
+            pc.onicecandidate = function (event) {
+                console.log(event);
+                if (!event || !event.candidate) 
+                    return;
+                else
+                    socket.emit("video call", {type: "iceCandidate", "candidate": event.candidate});
+            };
+            var remoteStream;
+            pc.onaddstream = function (event) {
+                remoteStream = event.stream;
+                var remoteVideo = document.getElementById("remoteVideo");
+                remoteVideo.src = window.URL.createObjectURL(event.stream);
+                remoteVideo.play();
+            };
+
+            socket.on("video call", function (data) {
+                switch(data.type) {
+                    case "iceCandidate":
+                        console.log("case : iceCandidate");
+                        pc.addIceCandidate(new RTCIceCandidate(data.candidate));
+                        break;
+                    
+                    case "offer":
+                        console.log("case : offer");
+                        pc.setRemoteDescription(new SessionDescription(data.description), function() { console.log("failure callback"); });
+
+                        pc.createAnswer(function(description) {
+                            pc.setLocalDescription(new SessionDescription(description));
+                            socket.emit("video call", {type: "answer", "description": description});
+                            }, function(){ console.log("failure callback"); });
+                    break;
+                    
+                    case "answer":
+                        console.log("case : answer");
+                        pc.setRemoteDescription(new SessionDescription(data.description),function(){ console.log("failure callback"); });
+                        break;
+                }
+            });
+
+            function call() {
+                console.log("Calling another peer");
+                console.log(pc.iceConnectionState);
+                console.log(pc);
+                if(pc.iceConnectionState == "closed"){
+                    pc = new RTCPeerConnection({"iceServers": []});
+                    pc.addStream(localStream);
+                    console.log(pc);
+                }
+                
+                pc.createOffer( function (description) {
+                    console.log("Creating offer for the other peer");
+
+                    pc.setLocalDescription(new SessionDescription(description), function(){ console.log("failure callback"); });
+
+                    socket.emit("video call", {type: "offer", "description": description});
+                }, function() { console.log("failure callback"); });     
+            };
+        </script>
+
+
+        <script type="text/javascript">
+            /* ################## GAME CODE ################## */
+            "use strict";
+
+            var FIELDS_TO_WIN = 4,
+                NR_FIELDS = 14,
+                CANVAS_SIZE = 500,
+                SECTION_SIZE = CANVAS_SIZE / NR_FIELDS,
+                LINE_COLOR = "#005",
+                LINE_SIZE = 2,
+                canvas, 
+                context,
+                board = [],
+                player_can_move = false;
+
+            var beep = new Audio("beep.mp3");
+            beep.volume = 0.2;
+
+            function proceedWinning (player) {
+                var winner_name = "";
+                if (player === user_id)
+                    winner_name = user_name;
+                else
+                    winner_name = opponent_name;
+
+                alert("Player '" + winner_name + "' won!");
+                socket.emit("reset_game");
+                resetGame();
+            }
+
+            /* https://stackoverflow.com/questions/35917734/how-do-i-traverse-an-array-diagonally-in-javascript */
+            function diagonal (array, bottomToTop) {
+                var returnArray = [];
+                for (var k = 0; k <= 2 * (NR_FIELDS - 1); ++k) 
+                {
+                    var temp = [];
+                    for (var y = NR_FIELDS - 1; y >= 0; --y)
+                    {
+                        var x = k - (bottomToTop ? NR_FIELDS - y : y);
+
+                        if (x >= 0 && x < NR_FIELDS)
+                            temp.push(array[y][x]);
+                    }
+                    if(temp.length >= FIELDS_TO_WIN)
+                        returnArray.push(temp);
+                }
+                return returnArray;
+            }
+
+            function helperWinArrChecker (arr_to_check) {
+                var last_player = 0;
+                var player_points = 0;
+                player_can_move = false;
+
+                for (var x = 0; x < arr_to_check.length; x++) 
+                {
+                    if (arr_to_check[x] !== last_player)
+                        player_points = 1;
+                    else
+                        player_points++;
+
+                    last_player = arr_to_check[x];
+
+                    if (last_player !== 0 && player_points >= FIELDS_TO_WIN) 
+                    {
+                        setTimeout(function() { proceedWinning(last_player); }, 200);
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            function checkWin () {
+                console.log(board);
+                /* Check columns and rows */
+                for (var x = 0; x < NR_FIELDS; x++) 
+                {
+                    var tmp_arr_columns = [];
+                    var tmp_arr_rows = [];
+
+                    for (var y = 0; y < NR_FIELDS; y++) 
+                    {
+                        tmp_arr_columns.push(board[y][x]);
+                        tmp_arr_rows.push(board[x][y]);
+                    }
+                    if (helperWinArrChecker(tmp_arr_columns))
+                        return;
+
+                    if (helperWinArrChecker(tmp_arr_rows))
+                        return;
+                }
+
+                /* Check both diagonal ways: / and \ directions */
+                var diagonal_arrays = diagonal(board, true);
+                for (var x = 0; x <= diagonal_arrays.length-1; x++) {
+                    if (helperWinArrChecker(diagonal_arrays[x]))
+                        return;
+                }
+
+                var diagonal_arrays = diagonal(board, false);
+                for (var x = 0; x <= diagonal_arrays.length-1; x++) {
+                    if (helperWinArrChecker(diagonal_arrays[x]))
+                        return;
+                }
+                return;
+            }
+            
+            function drawO (xCordinate, yCordinate) {
+                var halfSectionSize = (0.5 * SECTION_SIZE);
+                var centerX = xCordinate + halfSectionSize;
+                var centerY = yCordinate + halfSectionSize;
+                var radius = (SECTION_SIZE - 25 + (NR_FIELDS / 2)) / 2;
+                var startAngle = 0 * Math.PI;
+                var endAngle = 2 * Math.PI;
+
+                context.lineWidth = 4;
+                context.strokeStyle = "red";
+                context.beginPath();
+                context.arc(centerX, centerY, radius, startAngle, endAngle);
+                context.stroke();
+            }
+
+            function drawX (xCordinate, yCordinate) {
+                context.lineWidth = 4;
+                context.strokeStyle = "orange";
+                context.beginPath();
+
+                var offset = (SECTION_SIZE - 25 + (NR_FIELDS / 2)) / 2;
+                context.moveTo(xCordinate + offset, yCordinate + offset);
+                context.lineTo(xCordinate + SECTION_SIZE - offset, yCordinate + SECTION_SIZE - offset);
+
+                context.moveTo(xCordinate + offset, yCordinate + SECTION_SIZE - offset);
+                context.lineTo(xCordinate + SECTION_SIZE - offset, yCordinate + offset);
+
+                context.stroke();
+            }
+
+            function getCanvasMousePosition (event) {
+                var rect = canvas.getBoundingClientRect();
+                return {
+                    x: event.clientX - rect.left,
+                    y: event.clientY - rect.top
+                }
+            }
+
+            function addOpponentMove (opponentName, opponentId, move) {
+                opponent_name = opponentName;  // allocate always - it can be changed if 1 user left and other comes...
+
+                var done_move = move.split("&comma;");
+                if (done_move.length !== 2) {
+                    console.log("There is some error in coordinations sent from Player '" + opponent_name + "'.");
+                    return;
+                }
+                var yCordinate = done_move[0] * SECTION_SIZE;
+                var xCordinate = done_move[1] * SECTION_SIZE;
+
+                if (opponentId === 1)
+                    drawO(xCordinate, yCordinate);
+                else
+                    drawX(xCordinate, yCordinate);
+
+                board[done_move[0]][done_move[1]] = opponentId;
+            }
+
+            function addPlayerMove (event) {
+                var mouse = getCanvasMousePosition(event);
+                var xCordinate;
+                var yCordinate;
+
+                for (var x = 0; x < NR_FIELDS; x++)
+                {
+                    for (var y = 0; y < NR_FIELDS; y++)
+                    {
+                        if (board[y][x] != 0)  // no move, field is already occupied
+                            continue;
+
+                        xCordinate = x * SECTION_SIZE;
+                        yCordinate = y * SECTION_SIZE;
+
+                        if (
+                            mouse.x >= xCordinate && mouse.x <= xCordinate + SECTION_SIZE &&
+                            mouse.y >= yCordinate && mouse.y <= yCordinate + SECTION_SIZE
+                        ) {
+                            if (user_id === 1)
+                                drawO(xCordinate, yCordinate);
+                            else
+                                drawX(xCordinate, yCordinate);
+
+                            board[y][x] = user_id;
+                            
+                            var given_move = y + ',' + x;
+                            socket.emit("given_move", {username: user_name, user_id: user_id, given_move: given_move});
+
+                            return true;  // there was a move
+                        }
+                    }
+                }
+                return false;  // there was no move
+            }
+
+            function drawLines (lineWidth, strokeStyle) {
+                var lineStart = 4;
+                var lineLenght = CANVAS_SIZE - 5;
+
+                context.lineWidth = lineWidth;
+                context.lineCap = "round";
+                context.strokeStyle = strokeStyle;
+                context.beginPath();
+
+                /* Horizontal lines */
+                for (var y = 1; y < NR_FIELDS; y++) 
+                {  
+                    context.moveTo(lineStart, y * SECTION_SIZE);
+                    context.lineTo(lineLenght, y * SECTION_SIZE);
+                }
+
+                /* Vertical lines */
+                for (var x = 1; x < NR_FIELDS; x++) 
+                {
+                    context.moveTo(x * SECTION_SIZE, lineStart);
+                    context.lineTo(x * SECTION_SIZE, lineLenght);
+                }
+                context.stroke();
+            }
+
+            function getInitialBoard () {
+                board = [];
+
+                for (var x = 0; x < NR_FIELDS; x++)
+                {
+                    board.push([]);
+
+                    for (var y = 0; y < NR_FIELDS; y++) 
+                          board[x].push(0);
+                }
+                return board;
+            }
+
+            function resetGame () {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                drawLines(LINE_SIZE, LINE_COLOR);
+                board = getInitialBoard();
+            }
+
+            function initGame () {
+                canvas = document.getElementById("tic-tac-toe-board");
+                context = canvas.getContext("2d");
+
+                canvas.width = CANVAS_SIZE;
+                canvas.height = CANVAS_SIZE;
+
+                context.translate(0.5, 0.5);
+                    
+                drawLines(LINE_SIZE, LINE_COLOR);
+                board = getInitialBoard();
+
+                var reset_button = document.getElementById("resetGameButton");
+                reset_button.addEventListener("click", function() { 
+                    resetGame(); 
+                    socket.emit("reset_game");
+                });
+
+                socket.on("game_ready_get_uids", function(ready_players) {
+                    console.log(ready_players);
+
+                    // Game starts now. Time to save player ID and opponent name.
+                    // Opponent ID is not needed.
+                    for (var key in ready_players) {
+                        if (key === user_name)
+                            user_id = ready_players[key];
+                        else
+                            opponent_name = key;
+                    }
+
+                    if (user_id === 1) { // there will be only 2 players with ID 1 and 2
+                        document.getElementById("playerToMove").textContent = "Player to move - " + user_name;
+                        player_can_move = true;  // player with ID 1 starts the game
+                    }
+                    else {
+                        document.getElementById("playerToMove").textContent = "Player to move - " + opponent_name;
+                        player_can_move = false;
+                    }
+                });
+
+                canvas.addEventListener("click", function(event) { 
+                    if (player_can_move) {
+                        // if he made a move or not. There could be another field already occupied.
+                        if (addPlayerMove(event)) {
+                            player_can_move = false;
+                            document.getElementById("playerToMove").textContent = "Player to move - " + opponent_name;
+                            beep.play();
+                            checkWin();
+                        } 
+                    }
+                });
+
+                socket.on("given_move", function(data) {
+                        addOpponentMove(data.username, data.user_id, data.given_move); 
+                        checkWin();
+                        document.getElementById("playerToMove").textContent = "Player to move - " + user_name;
+                        player_can_move = true;
+                });
+
+                socket.on("reset_game", function() { resetGame(); });
+            }
+
+            // Game starts right now, right there!
+            initGame();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+\begin{thebibliography}{1}
+
+\bibitem{substring}
+Algorithms, substring search from princetown.
+\newblock
+  \url{http://www.cs.princeton.edu/courses/archive/spr14/cos226/lectures/53SubstringSearch.pdf}.
+
+\bibitem{bitap}
+Fuzzy bitap algorithm.
+\newblock
+  \url{https://www.programmingalgorithms.com/algorithm/fuzzy-bitap-algorithm}.
+
+\bibitem{naive}
+Naive string searchiing algorithm.
+\newblock
+  \url{https://www.geeksforgeeks.org/searching-for-patterns-set-1-naive-pattern-searching/}.
+
+\bibitem{bitap2}
+Ricardo Baeza-Yates and Gaston~H. Gonnet.
+\newblock A new approach to text searching.
+\newblock {\em Commun. ACM}, 35(10):74--82, 10 1992.
+
+\bibitem{approximate}
+Esko Ukkonen.
+\newblock Algorithms for approximate string matching.
+\newblock {\em Information and Control}, 64(1):100 -- 118, 1985.
+\newblock International Conference on Foundations of Computation Theory.
+
+\end{thebibliography}

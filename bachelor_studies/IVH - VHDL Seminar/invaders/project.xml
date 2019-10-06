@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ladislav Sulak, xsulak04 -->
+<project fitkitversion="1.0" outputprefix="invaders">
+    <!--  Project description -->
+    <name>Space Invaders</name>
+    <author>Ladislav Sulak</author>
+    <authoremail>xsulak04@stud.fit.vutbr.cz</authoremail>
+    <revision>20130607</revision>
+    <description>Space Invaders - jednoducha hra, ktora sa zobrazuje na vystup VGA. Je napisana pre FPGA, ale aj pre MCU. Ovlada sa pomocou FitKit klavesnice.</description>
+
+    <!--  MCU part --> 
+    <mcu>
+        <include>mcu/libs/keyboard/package.xml</include>
+        <include>mcu/libs/lcd/package.xml</include>
+        <include>mcu/libs/thermometer/package.xml</include>
+
+        <file>VGA_graphics.c</file>
+        <file>main.c</file>
+        <file>ship.c</file>
+    </mcu>
+
+    <!-- FPGA part -->
+    <fpga architecture="pc">
+        <include>fpga/ctrls/spi/package.xml</include>
+        <include>fpga/ctrls/vga/package.xml</include>
+        <include>fpga/ctrls/lcd/package.xml</include>
+        <include>fpga/ctrls/keyboard/package.xml</include>
+
+	<file>invaders_top.vhd</file>
+
+   </fpga>
+</project>
