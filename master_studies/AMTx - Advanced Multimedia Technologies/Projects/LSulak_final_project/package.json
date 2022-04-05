@@ -4,7 +4,7 @@
     "dependencies": {
         "ent": "~0.1.0",
         "express": "~3.3.4",
-        "socket.io": "^1.2.1"
+        "socket.io": "^2.4.0"
     },
     "author": "Ladislav Sulak <laco.sulak@gmail.com>",
     "description": "A real-time super chat with socket.io"
