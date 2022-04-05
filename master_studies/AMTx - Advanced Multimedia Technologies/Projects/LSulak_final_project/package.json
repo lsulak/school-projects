@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "dependencies": {
         "ent": "~0.1.0",
-        "express": "~3.3.4",
+        "express": "~3.11.0",
         "socket.io": "^2.4.0"
     },
     "author": "Ladislav Sulak <laco.sulak@gmail.com>",
